@@ -1,0 +1,8 @@
+# Run prettier and organize imports for JavaScript and TypeScript code
+"*.+(js|jsx|ts|tsx)":
+  - organize-imports-cli
+  - prettier --write
+
+# Run prettier on all supported file types
+"*.+(json|md|css|scss|yml|yaml)":
+  - prettier --write
