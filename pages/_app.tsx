@@ -1,10 +1,11 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import "tailwindcss/tailwind.css";
+import { ProvideAuth } from "../lib/auth";
 
 function CustomApp({ Component, pageProps }: AppProps) {
 	return (
-		<>
+		<ProvideAuth>
 			<Head>
 				<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 				<link
@@ -31,7 +32,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
 				<meta name="theme-color" content="#ffffff" />
 			</Head>
 			<Component {...pageProps} />
-		</>
+		</ProvideAuth>
 	);
 }
 
