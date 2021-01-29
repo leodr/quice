@@ -1,9 +1,13 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { ReactNode } from "react";
 import "tailwindcss/tailwind.css";
 import { ProvideAuth } from "../lib/auth";
 
 function CustomApp({ Component, pageProps }: AppProps) {
+	// @ts-expect-error
+	const getLayout = Component.getLayout || ((page: ReactNode) => page);
+
 	return (
 		<ProvideAuth>
 			<Head>
@@ -31,7 +35,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
 				<meta name="application-name" content="Quice" />
 				<meta name="theme-color" content="#ffffff" />
 			</Head>
-			<Component {...pageProps} />
+			{getLayout(<Component {...pageProps} />)}
 		</ProvideAuth>
 	);
 }
