@@ -2,7 +2,15 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-	purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+	purge: {
+		content: [
+			"./pages/**/*.{js,ts,jsx,tsx}",
+			"./components/**/*.{js,ts,jsx,tsx}",
+		],
+		options: {
+			safelist: [/^\.bg-[a-z]+?-500$/],
+		},
+	},
 	darkMode: false, // or 'media' or 'class'
 	theme: {
 		extend: {
@@ -11,6 +19,13 @@ module.exports = {
 			},
 			colors: {
 				rose: colors.rose,
+				orange: colors.orange,
+				yellow: colors.yellow,
+				green: colors.green,
+				teal: colors.teal,
+				ingido: colors.indigo,
+				purple: colors.purple,
+				pink: colors.pink,
 			},
 		},
 	},

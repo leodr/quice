@@ -3,6 +3,7 @@ import Head from "next/head";
 import { ReactNode } from "react";
 import "tailwindcss/tailwind.css";
 import { ProvideAuth } from "../lib/auth";
+import "../styles/app.css";
 
 function CustomApp({ Component, pageProps }: AppProps) {
 	// @ts-expect-error
