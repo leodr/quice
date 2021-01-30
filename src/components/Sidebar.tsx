@@ -283,11 +283,7 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 								key={form.id}
 								type="button"
 								onClick={() => {
-									router.push(
-										{ pathname: "/app", query: { form_id: form.id } },
-										undefined,
-										{ shallow: true }
-									);
+									router.push(`/form/${form.id}`);
 								}}
 								className="w-full group flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-gray-900 hover:bg-gray-50"
 							>
