@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { ReactNode, SyntheticEvent, useState } from "react";
-import { CheckIcon } from "../components/icons/Check";
-import { XIcon } from "../components/icons/X";
+import { SmallCheckIcon } from "../components/icons/small/Check";
+import { SmallXIcon } from "../components/icons/small/X";
 import { Spinner } from "../components/Spinner";
 import { AuthLayout } from "../layouts/AuthLayout";
 import { useAuth } from "../lib/auth";
@@ -96,13 +96,13 @@ export default function LoginPage() {
 								)}
 								{submissionState === "fulfilled" && (
 									<>
-										<CheckIcon className="h-6 w-6" />
+										<SmallCheckIcon className="h-6 w-6" />
 										<span>Sign in successful! Forwarding...</span>
 									</>
 								)}
 								{submissionState === "rejected" && (
 									<>
-										<XIcon className="h-6 w-6" />
+										<SmallXIcon className="h-6 w-6" />
 										<span>Incorrect username or password.</span>
 									</>
 								)}

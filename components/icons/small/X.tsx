@@ -1,6 +1,6 @@
 import { SVGProps } from "react";
 
-export function XIcon(props: SVGProps<SVGSVGElement>) {
+export function SmallXIcon(props: SVGProps<SVGSVGElement>) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
