@@ -25,5 +25,8 @@ export default async function nestHandler(
 }
 
 export const config = {
-	api: { externalResolver: true },
+	api: {
+		bodyParser: false,
+		externalResolver: true,
+	},
 };
