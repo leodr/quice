@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+    match /databases/{database}/documents {
+        match /{document=**} {
+            allow read, write: if false;
+        }
+        
+        function isUserOwner(form) {
+            return form.data.owner.type == 'user'
+                    && form.data.owner.id == request.auth.uid;
+        } 
+
+        match /forms/{formId} {
+            allow read: if isUserOwner(resource);
+            
+            allow write: if false;
+        }
+        
+        function hasAccessToSubmission(formId) {
+            let form = get(/databases/$(database)/documents/forms/$(formId));
+        
+            return isUserOwner(form);
+        }
+        
+        match /submissions/{submissionId} {
+            allow read: if hasAccessToSubmission(resource.data.formId);
+        
+            allow write: if false;
+        }
+    }
+}
