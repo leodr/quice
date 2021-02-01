@@ -2,7 +2,7 @@ import type { JsonObject } from "type-fest";
 import type { firebase } from "../firebase/client";
 import { FirebaseDoc } from "./firebase";
 
-type Color =
+export type FormColor =
 	| "orange"
 	| "yellow"
 	| "green"
@@ -12,15 +12,10 @@ type Color =
 	| "pink";
 
 export interface Form extends FirebaseDoc {
-	color: Color;
+	color: FormColor;
 	name: string;
+	description: string;
 	slug: string;
-	owner: FormOwner;
-}
-
-interface FormOwner {
-	type: "user" | "team";
-	id: string;
 }
 
 export interface FormSubmission extends FirebaseDoc {
