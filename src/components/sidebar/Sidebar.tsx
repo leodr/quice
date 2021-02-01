@@ -196,7 +196,7 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 								type="text"
 								name="search"
 								id="search"
-								className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-9 sm:text-sm border-gray-300 rounded-md"
+								className="focus:ring-rose-400 focus:border-rose-400 block w-full pl-9 sm:text-sm border-gray-300 rounded-md"
 								placeholder="Search"
 								value={searchString}
 								onChange={(e) => setSearchString(e.target.value)}
