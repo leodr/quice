@@ -1,7 +1,5 @@
 import { Transition } from "@headlessui/react";
-import clsx from "clsx";
 import firebase from "firebase";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactElement, useState } from "react";
 import { useFirestoreQuery } from "../../firebase/query";
@@ -12,6 +10,7 @@ import { MediumInboxIcon } from "../icons/medium/Inbox";
 import { SmallPlusIcon } from "../icons/small/Plus";
 import { Logo } from "../Logo";
 import { MenuLink } from "./MenuLink";
+import SecondaryLink from "./SecondaryLink";
 
 interface SidebarProps {}
 
@@ -207,47 +206,33 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 						aria-labelledby="teams-headline"
 					>
 						{forms.data?.map((form) => {
-							const url = `/${form.slug}`;
-
-							const isActive = router.asPath.startsWith(url);
-
-							console.log({ url, isActive, path: router.asPath });
-
 							return (
-								<Link href={url}>
-									<a
-										key={form.id}
-										type="button"
-										className={clsx(
-											"w-full group flex items-center px-3 py-2 text-sm font-medium rounded-md",
-											isActive
-												? "bg-gray-200 text-gray-900"
-												: "text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-										)}
-									>
+								<SecondaryLink
+									href={`/${form.slug}`}
+									leading={
 										<span
 											className={`w-2.5 h-2.5 mr-4 bg-${form.color}-500 rounded-full`}
 											aria-hidden="true"
-										/>
-										<span className="truncate">{form.name}</span>
-									</a>
-								</Link>
+										></span>
+									}
+								>
+									{form.name}
+								</SecondaryLink>
 							);
 						})}
-						<Link href="/new-form">
-							<a className="w-full group flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-gray-900 hover:bg-gray-50">
-								<span
-									className={`w-2.5 h-2.5 mr-4 relative`}
-									aria-hidden="true"
-								>
+						<SecondaryLink
+							href="/new-form"
+							leading={
+								<span className="w-2.5 h-2.5 mr-4 relative">
 									<SmallPlusIcon
-										className="absolute -top-1.5 -left-1.5 w-6 h-6 text-gray-500"
+										className="w-6 h-6 -top-2 -left-1.5 absolute text-gray-500 mr-4"
 										aria-hidden="true"
 									/>
 								</span>
-								<span className="truncate">Create new form</span>
-							</a>
-						</Link>
+							}
+						>
+							Create new form
+						</SecondaryLink>
 					</div>
 				</div>
 			</nav>
