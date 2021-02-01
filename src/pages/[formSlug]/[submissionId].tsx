@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode } from "react";
 import { ListHeader } from "src/components/ListHeader";
-import { useSnack } from "src/components/SnackbarProvider";
 import { SubmissionDetails } from "src/components/SubmissionDetails";
 import SubmissionList from "src/components/SubmissionList";
 import { firestore } from "src/firebase/client";
@@ -21,12 +20,6 @@ export default function FormPage() {
 			? firestore.collection("forms").where("slug", "==", formSlug)
 			: null
 	);
-
-	const showSnackbar = useSnack();
-
-	useEffect(() => {
-		showSnackbar("Hello World!");
-	}, []);
 
 	const form = formState.data?.[0];
 
