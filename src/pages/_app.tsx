@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ReactNode } from "react";
+import SnackbarProvider from "src/components/SnackbarProvider";
 import "tailwindcss/tailwind.css";
 import { ProvideAuth } from "../lib/auth";
 import "../styles/app.css";
@@ -36,7 +37,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
 				<meta name="application-name" content="Quice" />
 				<meta name="theme-color" content="#ffffff" />
 			</Head>
-			{getLayout(<Component {...pageProps} />)}
+			<SnackbarProvider>
+				{getLayout(<Component {...pageProps} />)}
+			</SnackbarProvider>
 		</ProvideAuth>
 	);
 }
