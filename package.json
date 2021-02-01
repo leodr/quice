@@ -8,7 +8,7 @@
 		"dev": "next dev",
 		"format": "prettier . --write --ignore-path .gitignore",
 		"lint": "eslint . --ignore-path .gitignore",
-		"seed": "node scripts/seedDatabase.js",
+		"seed-database": "node scripts/seedDatabase.js",
 		"start": "next start"
 	},
 	"dependencies": {
