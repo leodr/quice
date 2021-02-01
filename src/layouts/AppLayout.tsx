@@ -3,7 +3,7 @@ import { ReactNode, useState } from "react";
 import { MediumMenuIcon } from "../components/icons/medium/Menu";
 import { MediumXIcon } from "../components/icons/medium/X";
 import { Logo } from "../components/Logo";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/sidebar/Sidebar";
 
 interface AppLayoutProps {
 	children: ReactNode;

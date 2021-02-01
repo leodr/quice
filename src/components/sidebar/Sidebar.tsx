@@ -1,11 +1,17 @@
 import { Transition } from "@headlessui/react";
+import clsx from "clsx";
 import firebase from "firebase";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactElement, useState } from "react";
-import { useFirestoreQuery } from "../firebase/query";
-import { useAuth } from "../lib/auth";
-import { Form } from "../types/form";
-import { Logo } from "./Logo";
+import { useFirestoreQuery } from "../../firebase/query";
+import { useAuth } from "../../lib/auth";
+import { Form } from "../../types/form";
+import { MediumAtSymbolIcon } from "../icons/medium/AtSymbol";
+import { MediumInboxIcon } from "../icons/medium/Inbox";
+import { SmallPlusIcon } from "../icons/small/Plus";
+import { Logo } from "../Logo";
+import { MenuLink } from "./MenuLink";
 
 interface SidebarProps {}
 
@@ -147,99 +153,21 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 			{/* Navigation */}
 			<nav className="px-3 mt-6">
 				<div className="space-y-1">
-					{/* Current: "bg-gray-200 text-gray-900", Default: "text-gray-700 hover:text-gray-900 hover:bg-gray-50" */}
-					<a
-						href="#"
-						className="bg-gray-200 text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-					>
-						{/* Current: "text-gray-500", Default: "text-gray-400 group-hover:text-gray-500" */}
-						{/* Heroicon name: home */}
-						<svg
-							className="text-gray-500 mr-3 h-6 w-6"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-							/>
-						</svg>
-						Home
-					</a>
-					<a
-						href="#"
-						className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-					>
-						{/* Heroicon name: view-list */}
-						<svg
-							className="text-gray-400 group-hover:text-gray-500 mr-3 h-6 w-6"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M4 6h16M4 10h16M4 14h16M4 18h16"
-							/>
-						</svg>
-						My tasks
-					</a>
-					<a
-						href="#"
-						className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-					>
-						{/* Heroicon name: clock */}
-						<svg
-							className="text-gray-400 group-hover:text-gray-500 mr-3 h-6 w-6"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-							/>
-						</svg>
-						Recent
-					</a>
+					<MenuLink href="/inbox" Icon={MediumInboxIcon}>
+						Inbox
+					</MenuLink>
+					<MenuLink href="/tasks" Icon={MediumAtSymbolIcon}>
+						Assigned to me
+					</MenuLink>
 				</div>
-				{/* Sidebar Search */}
 				<div className="mt-8">
 					{/* Secondary navigation */}
-					<div className="flex items-center justify-between">
-						<h3
-							className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider"
-							id="teams-headline"
-						>
-							Forms
-						</h3>
-						<button className="h-6 w-6 rounded border text-gray-600">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 20 20"
-								fill="currentColor"
-							>
-								<path
-									fillRule="evenodd"
-									d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-									clipRule="evenodd"
-								/>
-							</svg>
-						</button>
-					</div>
+					<h3
+						className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider"
+						id="teams-headline"
+					>
+						Forms
+					</h3>
 					<div className="pl-3 my-3">
 						<label htmlFor="search" className="sr-only">
 							Search
@@ -278,22 +206,48 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 						role="group"
 						aria-labelledby="teams-headline"
 					>
-						{forms.data?.map((form) => (
-							<button
-								key={form.id}
-								type="button"
-								onClick={() => {
-									router.push(`/form/${form.id}`);
-								}}
-								className="w-full group flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-gray-900 hover:bg-gray-50"
-							>
+						{forms.data?.map((form) => {
+							const url = `/${form.slug}`;
+
+							const isActive = router.asPath.startsWith(url);
+
+							console.log({ url, isActive, path: router.asPath });
+
+							return (
+								<Link href={url}>
+									<a
+										key={form.id}
+										type="button"
+										className={clsx(
+											"w-full group flex items-center px-3 py-2 text-sm font-medium rounded-md",
+											isActive
+												? "bg-gray-200 text-gray-900"
+												: "text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+										)}
+									>
+										<span
+											className={`w-2.5 h-2.5 mr-4 bg-${form.color}-500 rounded-full`}
+											aria-hidden="true"
+										/>
+										<span className="truncate">{form.name}</span>
+									</a>
+								</Link>
+							);
+						})}
+						<Link href="/new-form">
+							<a className="w-full group flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-gray-900 hover:bg-gray-50">
 								<span
-									className={`w-2.5 h-2.5 mr-4 bg-${form.color}-500 rounded-full`}
+									className={`w-2.5 h-2.5 mr-4 relative`}
 									aria-hidden="true"
-								/>
-								<span className="truncate">{form.name}</span>
-							</button>
-						))}
+								>
+									<SmallPlusIcon
+										className="absolute -top-1.5 -left-1.5 w-6 h-6 text-gray-500"
+										aria-hidden="true"
+									/>
+								</span>
+								<span className="truncate">Create new form</span>
+							</a>
+						</Link>
 					</div>
 				</div>
 			</nav>
