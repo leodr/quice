@@ -11,7 +11,7 @@ export class FirebaseService {
 		if (admin.apps.length === 0) {
 			admin.initializeApp({
 				credential: admin.credential.cert({
-					projectId: this.configService.get("FIREBASE_PROJECT_ID"),
+					projectId: this.configService.get("NEXT_PUBLIC_FIREBASE_PROJECT_ID"),
 					privateKey: this.configService
 						.get("FIREBASE_PRIVATE_KEY")
 						.replace(/\\n/g, "\n"),
