@@ -19,6 +19,7 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 	const router = useRouter();
 
 	const [showDropdown, setShowDropdown] = useState(false);
+	const [searchString, setSearchString] = useState("");
 
 	const forms = useFirestoreQuery<Form>(
 		user
@@ -197,6 +198,8 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 								id="search"
 								className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-9 sm:text-sm border-gray-300 rounded-md"
 								placeholder="Search"
+								value={searchString}
+								onChange={(e) => setSearchString(e.target.value)}
 							/>
 						</div>
 					</div>
@@ -205,21 +208,27 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 						role="group"
 						aria-labelledby="teams-headline"
 					>
-						{forms.data?.map((form) => {
-							return (
-								<SecondaryLink
-									href={`/${form.slug}`}
-									leading={
-										<span
-											className={`w-2.5 h-2.5 mr-4 bg-${form.color}-500 rounded-full`}
-											aria-hidden="true"
-										></span>
-									}
-								>
-									{form.name}
-								</SecondaryLink>
-							);
-						})}
+						{forms.data
+							?.filter(
+								(form) =>
+									form.name.includes(searchString) ||
+									form.slug.includes(searchString)
+							)
+							.map((form) => {
+								return (
+									<SecondaryLink
+										href={`/${form.slug}`}
+										leading={
+											<span
+												className={`w-2.5 h-2.5 mr-4 bg-${form.color}-500 rounded-full`}
+												aria-hidden="true"
+											></span>
+										}
+									>
+										{form.name}
+									</SecondaryLink>
+								);
+							})}
 						<SecondaryLink
 							href="/new-form"
 							leading={
