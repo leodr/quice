@@ -4,9 +4,10 @@ import { ListHeader } from "src/components/ListHeader";
 import { SubmissionDetails } from "src/components/SubmissionDetails";
 import SubmissionList from "src/components/SubmissionList";
 import { firestore } from "src/firebase/client";
+import { useSubmissionQuery } from "src/firebase/infiniteQuery";
 import { useFirestoreQuery } from "src/firebase/query";
 import { AppLayout } from "src/layouts/AppLayout";
-import { Form, FormSubmission } from "src/types/form";
+import { Form } from "src/types/form";
 
 export default function FormPage() {
 	const router = useRouter();
@@ -23,19 +24,18 @@ export default function FormPage() {
 
 	const form = formState.data?.[0];
 
-	const submissions = useFirestoreQuery<FormSubmission>(
+	const { canLoadMore, loadMore, submissions } = useSubmissionQuery(
 		form
 			? firestore
 					.collection("submissions")
 					.where("formId", "==", form.id)
 					.orderBy("createdAt", "desc")
-					.limit(25)
 			: null
 	);
 
 	const selectedSubmission =
-		submissions.data && submissionId
-			? submissions.data.find((submission) => submission.id === submissionId)
+		submissions && submissionId
+			? submissions.find((submission) => submission.id === submissionId)
 			: null;
 
 	return (
@@ -73,9 +73,11 @@ export default function FormPage() {
 				<ListHeader headline={form?.name ?? ""}>
 					{form?.description ?? ""}
 				</ListHeader>
-				{submissions.data && (
+				{submissions && (
 					<SubmissionList
-						submissions={submissions.data}
+						submissions={submissions}
+						canLoadMore={canLoadMore}
+						loadMore={loadMore}
 						onSelect={(submissionId) =>
 							router.push(`/${form?.slug}/${submissionId}`, undefined, {
 								shallow: true,

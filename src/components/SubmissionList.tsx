@@ -4,25 +4,41 @@ import {
 	differenceInMinutes,
 	differenceInSeconds,
 	format,
+	isSameDay,
+	isThisYear,
+	isToday,
+	isYesterday,
 } from "date-fns";
 import { ReactElement, useMemo } from "react";
 import { GroupedVirtuoso } from "react-virtuoso";
 import { getSubmissionTitle } from "src/lib/submissionTitle";
 import { FormSubmission } from "src/types/form";
+import { Spinner } from "./Spinner";
 
 interface Props {
-	submissions: FormSubmission[];
+	submissions?: FormSubmission[];
+	canLoadMore: boolean;
+	loadMore: () => void;
 	onSelect: (submissionId: string) => void;
 }
 
 export default function SubmissionList({
+	canLoadMore,
+	loadMore,
 	submissions,
 	onSelect,
 }: Props): ReactElement {
 	const { groupCounts, groups } = useMemo(() => {
+		if (!submissions) {
+			return {
+				groupCounts: undefined,
+				groups: undefined,
+			};
+		}
+
 		const buckets: Array<{
 			type: "last-hour" | "day";
-			day?: string;
+			day?: Date;
 			submissions: FormSubmission[];
 		}> = [];
 
@@ -41,16 +57,22 @@ export default function SubmissionList({
 					buckets.unshift({ type: "last-hour", submissions: [submission] });
 				}
 			} else {
-				const dayKey = `${submissionDate.getUTCDate()}-${submissionDate.getUTCMonth()}-${submissionDate.getUTCFullYear()}`;
+				const dateCopy = new Date(submissionDate);
+				dateCopy.setUTCHours(0);
+				dateCopy.setUTCMinutes(0);
+				dateCopy.setUTCSeconds(0);
+				dateCopy.setUTCMilliseconds(0);
 
-				const dayBucket = buckets.find((bucket) => bucket.day === dayKey);
+				const dayBucket = buckets.find(
+					(bucket) => bucket.day && isSameDay(bucket.day, dateCopy)
+				);
 
 				if (dayBucket) {
 					dayBucket.submissions.push(submission);
 				} else {
 					buckets.push({
 						type: "day",
-						day: dayKey,
+						day: dateCopy,
 						submissions: [submission],
 					});
 				}
@@ -61,12 +83,26 @@ export default function SubmissionList({
 			groupCounts: buckets.map((bucket) => bucket.submissions.length),
 			groups: buckets.map((bucket) => {
 				if (bucket.type === "last-hour") {
-					return "This hour";
+					return "Last hour";
 				}
-				return bucket.day;
+
+				if (!bucket.day) throw Error("Invalid bucket.");
+
+				if (isToday(bucket.day)) return "Today";
+				if (isYesterday(bucket.day)) return "Yesterday";
+				if (isThisYear(bucket.day)) return format(bucket.day, "MMMM d");
+
+				return format(bucket.day, "MMMM d, yyy");
 			}),
 		};
 	}, [submissions]);
+
+	if (!submissions || !groups)
+		return (
+			<div className="flex-1 flex items-center justify-center">
+				<Spinner className="text-rose-500 h-8 w-8" />
+			</div>
+		);
 
 	return (
 		<nav
@@ -82,8 +118,20 @@ export default function SubmissionList({
 						</div>
 					);
 				}}
+				components={{
+					Footer: () => {
+						if (!canLoadMore) return null;
+
+						return (
+							<div className="flex justify-center pt-2 pb-4">
+								<Spinner className="text-rose-500 h-6 w-6" />
+							</div>
+						);
+					},
+				}}
 				className="overflow-x-hidden"
 				overscan={300}
+				endReached={loadMore}
 				itemContent={(index) => {
 					const submission = submissions[index];
 

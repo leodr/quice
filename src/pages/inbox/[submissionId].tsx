@@ -4,20 +4,19 @@ import { ListHeader } from "src/components/ListHeader";
 import { SubmissionDetails } from "src/components/SubmissionDetails";
 import SubmissionList from "src/components/SubmissionList";
 import { firestore } from "src/firebase/client";
-import { useFirestoreQuery } from "src/firebase/query";
+import { useSubmissionQuery } from "src/firebase/infiniteQuery";
 import { AppLayout } from "src/layouts/AppLayout";
-import { FormSubmission } from "src/types/form";
 
 export default function InboxPage() {
 	const router = useRouter();
 
-	const submissions = useFirestoreQuery<FormSubmission>(
-		firestore.collection("submissions").orderBy("createdAt", "desc").limit(25)
+	const { canLoadMore, loadMore, submissions } = useSubmissionQuery(
+		firestore.collection("submissions").orderBy("createdAt", "desc")
 	);
 
 	const selectedSubmission =
-		submissions.data && router.query.submissionId
-			? submissions.data.find(
+		submissions && router.query.submissionId
+			? submissions.find(
 					(submission) => submission.id === router.query.submissionId
 			  )
 			: null;
@@ -57,9 +56,11 @@ export default function InboxPage() {
 				<ListHeader headline="Inbox">
 					View every submission that has not been marked done.
 				</ListHeader>
-				{submissions.data && (
+				{submissions && (
 					<SubmissionList
-						submissions={submissions.data}
+						submissions={submissions}
+						canLoadMore={canLoadMore}
+						loadMore={loadMore}
 						onSelect={(submissionId) =>
 							router.push(`/inbox/${submissionId}`, undefined, {
 								shallow: true,

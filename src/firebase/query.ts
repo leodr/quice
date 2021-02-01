@@ -1,4 +1,5 @@
-import { useEffect, useReducer, useRef } from "react";
+import { useEffect, useReducer } from "react";
+import { useMemoCompare } from "src/hooks/memoCompare";
 import { FirebaseDoc } from "../types/firebase";
 import { PromiseStatus } from "../types/promise-status";
 import { firebase } from "./client";
@@ -75,22 +76,4 @@ export function useFirestoreQuery<T extends FirebaseDoc>(
 	}, [queryCached]);
 
 	return state;
-}
-
-function useMemoCompare<T>(
-	next: T,
-	compare: (previous: T | undefined, next?: T) => boolean
-): T {
-	const previousRef = useRef<T>();
-	const previous = previousRef.current;
-
-	const isEqual = compare(previous, next);
-
-	useEffect(() => {
-		if (!isEqual) {
-			previousRef.current = next;
-		}
-	});
-
-	return isEqual && previous !== undefined ? previous : next;
 }
