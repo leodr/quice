@@ -1,15 +1,15 @@
 import { Dependencies, Injectable } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
+import { FirebaseService } from "api/firebase/firebase.service";
 import { TokenPayload } from "api/token/token-payload.interface";
 import jwt from "jsonwebtoken";
 
 @Injectable()
-@Dependencies(ConfigService)
+@Dependencies(FirebaseService)
 export class TokenService {
-	constructor(private configService: ConfigService) {}
+	constructor(private readonly firebaseService: FirebaseService) {}
 
-	signToken(payload: TokenPayload) {
-		const jwtSecret = this.configService.get<string>("JWT_SECRET");
+	async signToken(payload: TokenPayload) {
+		const jwtSecret = await this.getSecret();
 
 		if (!jwtSecret) {
 			throw Error("The JWT secret environment variable could not be found.");
@@ -26,8 +26,8 @@ export class TokenService {
 		});
 	}
 
-	verifyToken(token: string) {
-		const jwtSecret = this.configService.get<string>("JWT_SECRET");
+	async verifyToken(token: string) {
+		const jwtSecret = await this.getSecret();
 
 		if (!jwtSecret) {
 			throw Error("The JWT secret environment variable could not be found.");
@@ -42,5 +42,42 @@ export class TokenService {
 				}
 			});
 		});
+	}
+
+	/**
+	 * Get the JWT secret from Firestore or generate a new one and store it.
+	 */
+	private async getSecret() {
+		const firestore = this.firebaseService.firestore;
+
+		const secretDoc = await firestore.collection("security").doc("jwt").get();
+
+		if (secretDoc.exists && secretDoc.data()?.secret) {
+			return secretDoc.data()?.secret as string;
+		} else {
+			const secret = this.generateSecret();
+
+			await firestore.collection("security").doc("jwt").set({ secret });
+
+			return secret;
+		}
+	}
+
+	/**
+	 * Create a random 64 character long string to act as a JWT secret.
+	 */
+	private generateSecret() {
+		const chars: string[] = [];
+		const possibleCharacters =
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		const charactersLength = possibleCharacters.length;
+
+		for (let i = 0; i < 64; i++) {
+			chars.push(
+				possibleCharacters.charAt(Math.floor(Math.random() * charactersLength))
+			);
+		}
+
+		return chars.join();
 	}
 }
