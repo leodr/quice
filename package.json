@@ -13,10 +13,10 @@
 	},
 	"dependencies": {
 		"@headlessui/react": "^0.2.0",
-		"@nestjs/common": "^7.6.7",
+		"@nestjs/common": "^7.6.8",
 		"@nestjs/config": "^0.6.2",
-		"@nestjs/core": "^7.6.7",
-		"@nestjs/platform-express": "^7.6.7",
+		"@nestjs/core": "^7.6.8",
+		"@nestjs/platform-express": "^7.6.8",
 		"@tailwindcss/forms": "^0.2.1",
 		"autoprefixer": "^10.2.4",
 		"clsx": "^1.1.1",
@@ -35,7 +35,7 @@
 		"react-dom": "^17.0.1",
 		"react-hook-form": "^6.14.2",
 		"react-linkify": "^1.0.0-alpha",
-		"react-virtuoso": "^1.5.1",
+		"react-virtuoso": "^1.5.3",
 		"reflect-metadata": "^0.1.13",
 		"rxjs": "^6.6.3",
 		"tailwindcss": "^2.0.2"
