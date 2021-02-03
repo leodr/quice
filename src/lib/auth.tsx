@@ -17,10 +17,6 @@ interface AuthContextValue {
 		redirect?: string
 	) => Promise<firebase.User | null>;
 
-	signinWithGitHub: (redirect?: string) => Promise<firebase.User | null>;
-
-	signinWithGoogle: (redirect?: string) => Promise<firebase.User | null>;
-
 	signup: (
 		email: string,
 		password: string,
@@ -60,34 +56,6 @@ function useProvideAuth(): AuthContextValue {
 		const response = await firebase
 			.auth()
 			.signInWithEmailAndPassword(email, password);
-
-		setUser(response.user);
-
-		if (redirect) {
-			router.push(redirect);
-		}
-
-		return response.user;
-	}
-
-	async function signinWithGitHub(redirect?: string) {
-		const response = await firebase
-			.auth()
-			.signInWithPopup(new firebase.auth.GithubAuthProvider());
-
-		setUser(response.user);
-
-		if (redirect) {
-			router.push(redirect);
-		}
-
-		return response.user;
-	}
-
-	async function signinWithGoogle(redirect?: string) {
-		const response = await firebase
-			.auth()
-			.signInWithPopup(new firebase.auth.GoogleAuthProvider());
 
 		setUser(response.user);
 
@@ -146,8 +114,6 @@ function useProvideAuth(): AuthContextValue {
 		signin,
 		signup,
 		signout,
-		signinWithGoogle,
-		signinWithGitHub,
 		sendPasswordResetEmail,
 		confirmPasswordReset,
 	};
