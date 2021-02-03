@@ -18,8 +18,6 @@ export default function SecondaryLink({
 
 	const isActive = router.asPath.startsWith(href);
 
-	console.log({ href, isActive, path: router.asPath });
-
 	return (
 		<Link href={href}>
 			<a

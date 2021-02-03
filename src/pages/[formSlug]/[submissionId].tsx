@@ -12,8 +12,6 @@ import { Form } from "src/types/form";
 export default function FormPage() {
 	const router = useRouter();
 
-	console.log(router.query);
-
 	const { formSlug, submissionId } = router.query;
 
 	const formState = useFirestoreQuery<Form>(

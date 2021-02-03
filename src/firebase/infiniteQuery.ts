@@ -31,8 +31,6 @@ export function useSubmissionQuery(
 					return b.createdAt.toMillis() - a.createdAt.toMillis();
 				});
 
-				console.log(newDocs);
-
 				return newDocs;
 			});
 		},
@@ -66,8 +64,6 @@ export function useSubmissionQuery(
 		if (!queryCached) return;
 
 		const lastDoc = docs?.[docs.length - 1];
-
-		console.log({ lastDoc });
 
 		const unsubscribe = queryCached
 			.limit(chunkSize)
