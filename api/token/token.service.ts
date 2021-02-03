@@ -78,6 +78,6 @@ export class TokenService {
 			);
 		}
 
-		return chars.join();
+		return chars.join("");
 	}
 }
