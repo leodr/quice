@@ -22,13 +22,7 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 	const [searchString, setSearchString] = useState("");
 
 	const forms = useFirestoreQuery<Form>(
-		user
-			? firebase
-					.firestore()
-					.collection("forms")
-					.where("owner.type", "==", "user")
-					.where("owner.id", "==", user.uid)
-			: null
+		user ? firebase.firestore().collection("forms").orderBy("name") : null
 	);
 
 	return (
