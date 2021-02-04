@@ -203,11 +203,13 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 						aria-labelledby="teams-headline"
 					>
 						{forms.data
-							?.filter(
-								(form) =>
-									form.name.includes(searchString) ||
-									form.slug.includes(searchString)
-							)
+							?.filter((form) => {
+								const name = form.name.toLowerCase();
+								const slug = form.slug.toLowerCase();
+								const query = searchString.toLowerCase();
+
+								return name.includes(query) || slug.includes(query);
+							})
 							.map((form) => {
 								return (
 									<SecondaryLink
