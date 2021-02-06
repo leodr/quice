@@ -1,19 +1,19 @@
 {
-	"fieldOverrides": [],
-	"indexes": [
-		{
-			"collectionGroup": "submissions",
-			"fields": [
-				{
-					"fieldPath": "formId",
-					"order": "ASCENDING"
-				},
-				{
-					"fieldPath": "createdAt",
-					"order": "DESCENDING"
-				}
-			],
-			"queryScope": "COLLECTION"
-		}
-	]
+  "fieldOverrides": [],
+  "indexes": [
+    {
+      "collectionGroup": "submissions",
+      "fields": [
+        {
+          "fieldPath": "formId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ],
+      "queryScope": "COLLECTION"
+    }
+  ]
 }

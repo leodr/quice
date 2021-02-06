@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 export function useHost(): string {
-	const [host, setHost] = useState("");
+  const [host, setHost] = useState("");
 
-	useEffect(() => {
-		setHost(window.location.host);
-	}, []);
+  useEffect(() => {
+    setHost(window.location.host);
+  }, []);
 
-	return host;
+  return host;
 }

@@ -2,9 +2,9 @@ import { ReactNode } from "react";
 import { AppLayout } from "src/layouts/AppLayout";
 
 export default function TasksPage() {
-	return <></>;
+  return <></>;
 }
 
 TasksPage.getLayout = (page: ReactNode) => {
-	return <AppLayout>{page}</AppLayout>;
+  return <AppLayout>{page}</AppLayout>;
 };

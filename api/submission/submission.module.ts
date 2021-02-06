@@ -4,8 +4,8 @@ import { SubmissionController } from "./submission.controller";
 import { SubmissionService } from "./submission.service";
 
 @Module({
-	imports: [],
-	controllers: [SubmissionController],
-	providers: [SubmissionService, FirebaseService],
+  imports: [],
+  controllers: [SubmissionController],
+  providers: [SubmissionService, FirebaseService],
 })
 export class SubmissionModule {}

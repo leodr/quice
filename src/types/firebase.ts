@@ -1,3 +1,3 @@
 export interface FirebaseDoc {
-	id: string;
+  id: string;
 }

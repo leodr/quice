@@ -7,26 +7,26 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const server = express();
 
 const appPromise = NestFactory.create(
-	AppModule,
-	new ExpressAdapter(server)
+  AppModule,
+  new ExpressAdapter(server)
 ).then((app) => {
-	app.enableCors();
-	app.setGlobalPrefix("/api");
-	return app.init();
+  app.enableCors();
+  app.setGlobalPrefix("/api");
+  return app.init();
 });
 
 export default async function nestHandler(
-	req: NextApiRequest,
-	res: NextApiResponse
+  req: NextApiRequest,
+  res: NextApiResponse
 ) {
-	await appPromise;
+  await appPromise;
 
-	server(req, res);
+  server(req, res);
 }
 
 export const config = {
-	api: {
-		bodyParser: false,
-		externalResolver: true,
-	},
+  api: {
+    bodyParser: false,
+    externalResolver: true,
+  },
 };
