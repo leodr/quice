@@ -6,7 +6,7 @@ import { ReactNode, SyntheticEvent, useState } from "react";
 import Spinner from "../components/Spinner";
 import { AuthLayout } from "../layouts/AuthLayout";
 import { useAuth } from "../lib/auth";
-import { PromiseStatus } from "../types/promise-status";
+import { PromiseStatus } from "../types/promiseStatus";
 
 interface FormElements extends HTMLFormControlsCollection {
 	email: HTMLInputElement;
@@ -111,7 +111,7 @@ export default function LoginPage() {
 					</button>
 					<div className="flex items-center justify-end">
 						<div className="text-sm">
-							<Link href="/password_reset">
+							<Link href="/reset-password">
 								<a className="font-medium text-rose-600 hover:text-rose-500">
 									Forgot your password?
 								</a>

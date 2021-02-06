@@ -5,7 +5,7 @@ import { ReactNode, SyntheticEvent, useState } from "react";
 import Logo from "src/components/Logo";
 import Spinner from "src/components/Spinner";
 import { useAuth } from "src/lib/auth";
-import { PromiseStatus } from "src/types/promise-status";
+import { PromiseStatus } from "src/types/promiseStatus";
 
 interface FormElements extends HTMLFormControlsCollection {
 	firstName: HTMLInputElement;

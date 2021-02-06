@@ -6,7 +6,7 @@ import { ReactNode, SyntheticEvent, useState } from "react";
 import Spinner from "../components/Spinner";
 import { AuthLayout } from "../layouts/AuthLayout";
 import { useAuth } from "../lib/auth";
-import { PromiseStatus } from "../types/promise-status";
+import { PromiseStatus } from "../types/promiseStatus";
 
 interface FormElements extends HTMLFormControlsCollection {
 	email: HTMLInputElement;
