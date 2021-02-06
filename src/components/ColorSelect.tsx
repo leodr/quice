@@ -3,7 +3,7 @@ import clsx from "clsx";
 import React, { ReactElement } from "react";
 import { FormColor } from "src/types/form";
 
-export const colors: FormColor[] = [
+const colors: FormColor[] = [
 	"green",
 	"indigo",
 	"orange",
