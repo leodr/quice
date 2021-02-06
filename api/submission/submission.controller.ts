@@ -4,51 +4,31 @@ import {
 	Body,
 	Controller,
 	Dependencies,
-	Headers,
-	Logger,
+	Param,
 	Post,
 } from "@nestjs/common";
-import { TokenPayload } from "api/token/token-payload.interface";
-import { TokenService } from "api/token/token.service";
-import { JsonObject } from "type-fest";
+import { JsonValue } from "type-fest";
 import { SubmissionService } from "./submission.service";
 
-@Controller()
-@Dependencies(TokenService, SubmissionService)
+@Controller("forms/:formId/submissions")
+@Dependencies(SubmissionService)
 export class SubmissionController {
-	private readonly logger = new Logger(SubmissionController.name);
+	constructor(private submissionService: SubmissionService) {}
 
-	constructor(
-		private tokenService: TokenService,
-		private submissionService: SubmissionService
-	) {}
-
-	@Post("submit")
-	@Bind(Headers("authorization"), Body())
-	async submit(authHeader: string | undefined, body: JsonObject) {
-		if (!authHeader) {
-			throw new BadRequestException("No authorization header specified.");
+	@Post()
+	@Bind(Param("formId"), Body())
+	async submit(formId: string | undefined, body: JsonValue) {
+		if (!formId) {
+			throw new BadRequestException("No form id specified specified.");
 		}
 
-		if (!/^bearer /i.test(authHeader)) {
+		if (typeof body !== "object" || body === null || Array.isArray(body)) {
 			throw new BadRequestException(
-				"Authorization header has to start with `bearer `."
+				"The request body has to contain a JSON object."
 			);
 		}
 
-		const token = authHeader.substr(7);
-
-		let payload: TokenPayload;
-
-		try {
-			payload = await this.tokenService.verifyToken(token);
-		} catch (e) {
-			this.logger.error(e);
-
-			throw new BadRequestException("Invalid authorization token.");
-		}
-
-		await this.submissionService.create(payload.fid, body);
+		await this.submissionService.create(formId, body);
 
 		return "Successfully submitted form.";
 	}

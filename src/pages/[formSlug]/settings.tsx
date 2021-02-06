@@ -141,7 +141,7 @@ export default function FormSettingsPage() {
 								background: null,
 							}}
 						>{`async function handleFormSubmission(data) {
-    const response = await fetch("https://${host}/api/submit?formId=${data?.[0]?.id}", {
+    const response = await fetch("https://${host}/api/forms/${data?.[0]?.id}/submissions", {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
