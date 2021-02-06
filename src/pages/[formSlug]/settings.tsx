@@ -181,13 +181,15 @@ export default function FormSettingsPage() {
 									confirmText: "Confirm deletion",
 								});
 
-								const response = await fetch(`/api/forms/${data?.[0].id}`, {
-									method: "DELETE",
-								});
+								if (result) {
+									const response = await fetch(`/api/forms/${data?.[0].id}`, {
+										method: "DELETE",
+									});
 
-								if (response.ok) showSnackbar("Form was deleted.");
+									if (response.ok) showSnackbar("Form was deleted.");
 
-								router.push("/inbox");
+									router.push("/inbox");
+								}
 							}}
 						>
 							Delete this form
