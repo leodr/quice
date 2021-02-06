@@ -27,6 +27,21 @@ module.exports = {
 				purple: colors.purple,
 				pink: colors.pink,
 			},
+			typography: (theme) => ({
+				DEFAULT: {
+					css: {
+						pre: {
+							backgroundColor: theme("colors.gray.100"),
+						},
+						code: {
+							backgroundColor: theme("colors.gray.100"),
+							borderRadius: theme("borderRadius.md"),
+							padding: `${theme("padding.1")} ${theme("padding.px")}`,
+							color: theme("colors.pink.600"),
+						},
+					},
+				},
+			}),
 		},
 	},
 	variants: {
@@ -34,5 +49,5 @@ module.exports = {
 			opacity: ["disabled"],
 		},
 	},
-	plugins: [require("@tailwindcss/forms")],
+	plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
 };

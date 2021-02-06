@@ -2,36 +2,19 @@ import { Listbox } from "@headlessui/react";
 import kebabCase from "lodash.kebabcase";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ColorSelect } from "src/components/ColorSelect";
 import { firestore } from "src/firebase/client";
+import { useHost } from "src/hooks/useHost";
 import { AppLayout } from "src/layouts/AppLayout";
+import { validateName } from "src/lib/validateName";
 import { FormColor } from "src/types/form";
 
 interface CreateFormForm {
 	name: string;
 	description: string;
 	color: FormColor;
-}
-
-async function validateName(name: string) {
-	const slug = kebabCase(name);
-
-	if (invalidSlugs.includes(slug)) {
-		return "This URL is reserved, please choose another name.";
-	}
-
-	const formWithSameSlug = await firestore
-		.collection("forms")
-		.where("slug", "==", slug)
-		.get();
-
-	if (formWithSameSlug.size > 0) {
-		return "A form with this URL already exists.";
-	}
-
-	return true;
 }
 
 export default function NewFormPage() {
@@ -46,11 +29,7 @@ export default function NewFormPage() {
 
 	const router = useRouter();
 
-	const [host, setHost] = useState("");
-
-	useEffect(() => {
-		setHost(window.location.host);
-	}, []);
+	const host = useHost();
 
 	const name = watch("name");
 
@@ -189,5 +168,3 @@ export default function NewFormPage() {
 NewFormPage.getLayout = (page: ReactNode) => {
 	return <AppLayout>{page}</AppLayout>;
 };
-
-const invalidSlugs = ["new-form", "login", "join", "inbox", "tasks"];
