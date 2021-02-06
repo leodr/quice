@@ -1,7 +1,7 @@
 import kebabCase from "lodash.kebabcase";
 import { firestore } from "src/firebase/client";
 
-export async function validateName(name: string) {
+export async function validateFormName(name: string) {
   const slug = kebabCase(name);
 
   if (invalidSlugs.includes(slug)) {

@@ -38,7 +38,6 @@ export default function DataEntry({
       }
 
       return <ObjectEntry propertyName={prettyName} value={value} />;
-
     default:
       throw Error("Unknown data type for value.");
   }

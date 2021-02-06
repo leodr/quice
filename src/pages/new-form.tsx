@@ -8,8 +8,8 @@ import ColorSelect from "src/components/ColorSelect";
 import { firestore } from "src/firebase/client";
 import { useHost } from "src/hooks/useHost";
 import { AppLayout } from "src/layouts/AppLayout";
-import { validateName } from "src/lib/validateName";
 import { FormColor } from "src/types/form";
+import { validateFormName } from "src/utils/validateFormName";
 
 interface CreateFormForm {
   name: string;
@@ -81,7 +81,7 @@ export default function NewFormPage() {
                               name="name"
                               id="name"
                               className="relative flex-1 block w-full focus:ring-rose-400 focus:border-rose-400 min-w-0 rounded-none rounded-t-md sm:text-sm border-gray-300"
-                              ref={register({ validate: validateName })}
+                              ref={register({ validate: validateFormName })}
                             />
                             <span className="inline-flex items-center px-3 py-1 rounded-b-md border border-t-0 border-gray-300 bg-gray-50 text-gray-500 text-sm sm:text-xs">
                               {`${host}/${slug}`}
