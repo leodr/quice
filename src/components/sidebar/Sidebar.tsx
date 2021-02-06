@@ -213,6 +213,7 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 							.map((form) => {
 								return (
 									<SecondaryLink
+										key={form.id}
 										href={`/${form.slug}`}
 										leading={
 											<span
