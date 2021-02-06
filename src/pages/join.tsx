@@ -28,11 +28,24 @@ export default function JoinPage() {
 	) {
 		event.preventDefault();
 
-		const { email, password } = event.currentTarget.elements;
+		const {
+			email,
+			password,
+			firstName,
+			lastName,
+		} = event.currentTarget.elements;
 
 		setSubmissionState("pending");
 		try {
-			await signup(email.value, password.value, "/app");
+			await signup(
+				{
+					email: email.value,
+					password: password.value,
+					firstName: firstName.value,
+					lastName: lastName.value,
+				},
+				"/inbox"
+			);
 			setSubmissionState("fulfilled");
 		} catch {
 			setSubmissionState("rejected");

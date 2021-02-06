@@ -6,7 +6,14 @@ import React, {
 	useEffect,
 	useState,
 } from "react";
-import { firebase } from "../firebase/client";
+import { firebase, firestore } from "../firebase/client";
+
+interface SignupInfo {
+	email: string;
+	password: string;
+	firstName: string;
+	lastName: string;
+}
 
 interface AuthContextValue {
 	user: firebase.User | null;
@@ -18,8 +25,7 @@ interface AuthContextValue {
 	) => Promise<firebase.User | null>;
 
 	signup: (
-		email: string,
-		password: string,
+		info: SignupInfo,
 		redirect?: string
 	) => Promise<firebase.User | null>;
 
@@ -66,10 +72,23 @@ function useProvideAuth(): AuthContextValue {
 		return response.user;
 	}
 
-	async function signup(email: string, password: string, redirect?: string) {
+	async function signup(
+		{ email, password, firstName, lastName }: SignupInfo,
+		redirect?: string
+	) {
 		const response = await firebase
 			.auth()
 			.createUserWithEmailAndPassword(email, password);
+
+		const { user } = response;
+
+		if (user) {
+			await firestore.collection("users").doc(user.uid).set({
+				firstName,
+				lastName,
+				emailAddress: user.email,
+			});
+		}
 
 		setUser(response.user);
 

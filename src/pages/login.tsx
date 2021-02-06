@@ -30,7 +30,7 @@ export default function LoginPage() {
 		setSubmissionState("pending");
 
 		try {
-			await signin(email.value, password.value, "/app");
+			await signin(email.value, password.value, "/inbox");
 			setSubmissionState("fulfilled");
 		} catch {
 			setSubmissionState("rejected");
