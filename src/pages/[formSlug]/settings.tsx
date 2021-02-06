@@ -1,5 +1,6 @@
 import { Listbox } from "@headlessui/react";
 import clsx from "clsx";
+import SolidArrowLeftIcon from "heroicons/solid/arrow-left.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
@@ -8,7 +9,6 @@ import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import js from "react-syntax-highlighter/dist/cjs/languages/hljs/javascript";
 import codeTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/github-gist";
 import { ColorSelect } from "src/components/ColorSelect";
-import { SmallLeftArrowIcon } from "src/components/icons/small/SmallLeftArrow";
 import { useModal } from "src/components/ModalProvider";
 import { useSnack } from "src/components/SnackbarProvider";
 import { Switch } from "src/components/Switch";
@@ -315,7 +315,7 @@ export default function FormSettingsPage() {
 					<div className="px-4 sm:px-6 md:px-0 flex items-center space-x-4">
 						<Link href={`/${formSlug}`}>
 							<a>
-								<SmallLeftArrowIcon className="h-6 w-6 text-gray-400" />
+								<SolidArrowLeftIcon className="h-6 w-6 text-gray-400" />
 							</a>
 						</Link>
 						<h1 className="text-3xl font-extrabold text-gray-900">

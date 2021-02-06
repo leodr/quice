@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
+import SolidCheckIcon from "heroicons/solid/check.svg";
+import SolidXIcon from "heroicons/solid/x.svg";
 import Link from "next/link";
 import { ReactNode, SyntheticEvent, useState } from "react";
-import { SmallCheckIcon } from "../components/icons/small/Check";
-import { SmallXIcon } from "../components/icons/small/X";
 import { Spinner } from "../components/Spinner";
 import { AuthLayout } from "../layouts/AuthLayout";
 import { useAuth } from "../lib/auth";
@@ -79,13 +79,13 @@ export default function PasswordResetPage() {
 						{submissionState === "pending" && <Spinner className="w-6 h-6" />}
 						{submissionState === "fulfilled" && (
 							<>
-								<SmallCheckIcon className="h-6 w-6" />
+								<SolidCheckIcon className="h-6 w-6" />
 								<span>Email sent</span>
 							</>
 						)}
 						{submissionState === "rejected" && (
 							<>
-								<SmallXIcon className="h-6 w-6" />
+								<SolidXIcon className="h-6 w-6" />
 								<span>Please check your inputs.</span>
 							</>
 						)}

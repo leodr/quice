@@ -1,5 +1,5 @@
-import React, { ReactElement, useMemo } from "react";
-import { SmallCheckIcon } from "../icons/small/Check";
+import SolidCheckIcon from "heroicons/solid/check.svg";
+import SolidXIcon from "heroicons/solid/x.svg";
 import { SmallXIcon } from "../icons/small/X";
 import { prettifyPropertyName } from "./propertyName";
 
@@ -25,6 +25,7 @@ export default function BooleanEntry({
 				</dt>
 				<dd className="mt-1 text-sm text-green-600">
 					<SmallCheckIcon className="h-5 w-5 -ml-px" />
+					<SolidCheckIcon className="h-5 w-5 -ml-px" aria-hidden="true" />
 				</dd>
 			</div>
 		);
@@ -37,6 +38,7 @@ export default function BooleanEntry({
 			</dt>
 			<dd className="mt-1 text-sm text-red-600">
 				<SmallXIcon className="h-5 w-5 -ml-1" />
+				<SolidXIcon className="h-5 w-5 -ml-1" aria-hidden="true" />
 			</dd>
 		</div>
 	);

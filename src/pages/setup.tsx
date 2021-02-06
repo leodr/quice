@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
+import SolidCheckIcon from "heroicons/solid/check.svg";
+import SolidXIcon from "heroicons/solid/x.svg";
 import { ReactNode, SyntheticEvent, useState } from "react";
-import { SmallCheckIcon } from "src/components/icons/small/Check";
-import { SmallXIcon } from "src/components/icons/small/X";
 import { Logo } from "src/components/Logo";
 import { Spinner } from "src/components/Spinner";
 import { useAuth } from "src/lib/auth";
@@ -169,13 +169,13 @@ export default function SetupPage() {
 										)}
 										{submissionState === "fulfilled" && (
 											<>
-												<SmallCheckIcon className="h-6 w-6" />
+												<SolidCheckIcon className="h-6 w-6" />
 												<span>Account created! Forwarding...</span>
 											</>
 										)}
 										{submissionState === "rejected" && (
 											<>
-												<SmallXIcon className="h-6 w-6" />
+												<SolidXIcon className="h-6 w-6" />
 												<span>Account creation failed.</span>
 											</>
 										)}

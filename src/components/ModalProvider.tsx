@@ -1,4 +1,5 @@
 import { Transition } from "@headlessui/react";
+import OutlineExclamationIcon from "heroicons/outline/exclamation.svg";
 import {
 	createContext,
 	ReactElement,
@@ -7,7 +8,6 @@ import {
 	useContext,
 	useState,
 } from "react";
-import { MediumExlamationIcon } from "./icons/medium/Exclamation";
 
 type DialogType = "destructive";
 
@@ -108,7 +108,7 @@ export function ModalProvider({ children }: Props): ReactElement {
 					>
 						<div>
 							<div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
-								<MediumExlamationIcon
+								<OutlineExclamationIcon
 									className="h-6 w-6 text-red-600"
 									aria-hidden="true"
 								/>

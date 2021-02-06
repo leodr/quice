@@ -1,7 +1,7 @@
 import { Transition } from "@headlessui/react";
+import OutlineMenuIcon from "heroicons/outline/menu.svg";
+import OutlineXIcon from "heroicons/outline/x.svg";
 import { ReactNode, useState } from "react";
-import { MediumMenuIcon } from "../components/icons/medium/Menu";
-import { MediumXIcon } from "../components/icons/medium/X";
 import { Logo } from "../components/Logo";
 import Sidebar from "../components/sidebar/Sidebar";
 
@@ -50,7 +50,7 @@ export function AppLayout({ children }: AppLayoutProps) {
 								className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
 							>
 								<span className="sr-only">Close sidebar</span>
-								<MediumXIcon
+								<OutlineXIcon
 									className="h-6 w-6 text-white"
 									aria-hidden="true"
 								/>
@@ -82,7 +82,7 @@ export function AppLayout({ children }: AppLayoutProps) {
 								className="-mr-3 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-pink-600"
 							>
 								<span className="sr-only">Open sidebar</span>
-								<MediumMenuIcon className="h-6 w-6" aria-hidden="true" />
+								<OutlineMenuIcon className="h-6 w-6" aria-hidden="true" />
 							</button>
 						</div>
 					</div>

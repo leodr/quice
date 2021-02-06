@@ -1,14 +1,14 @@
 import { Transition } from "@headlessui/react";
 import clsx from "clsx";
+import SolidClockIcon from "heroicons/solid/clock.svg";
+import SolidHashtagIcon from "heroicons/solid/hashtag.svg";
+import SolidLinkIcon from "heroicons/solid/link.svg";
+import SolidUserAddIcon from "heroicons/solid/user-add.svg";
 import React, { ReactElement, useState } from "react";
 import { firestore } from "src/firebase/client";
 import { getSubmissionTitle } from "src/lib/submissionTitle";
 import { FormSubmission } from "src/types/form";
 import { DataList } from "./form-data-list/DataList";
-import { SmallClockIcon } from "./icons/small/Clock";
-import { SmallHashtagIcon } from "./icons/small/Hashtag";
-import { SmallLinkIcon } from "./icons/small/Link";
-import { SmallUserAddIcon } from "./icons/small/UserAdd";
 import { useSnack } from "./SnackbarProvider";
 
 interface Props {
@@ -48,14 +48,14 @@ export function SubmissionDetails({ submission }: Props): ReactElement {
 								</h2>
 								<div className="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
 									<div className="mt-2 flex items-center text-sm text-gray-500">
-										<SmallClockIcon
+										<SolidClockIcon
 											className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
 											aria-hidden="true"
 										/>
 										January 14, 14:38
 									</div>
 									<div className="mt-2 flex items-center text-sm text-gray-500">
-										<SmallHashtagIcon
+										<SolidHashtagIcon
 											className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
 											aria-hidden="true"
 										/>
@@ -69,7 +69,7 @@ export function SubmissionDetails({ submission }: Props): ReactElement {
 										type="button"
 										className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400"
 									>
-										<SmallUserAddIcon
+										<SolidUserAddIcon
 											className="-ml-1 mr-2 h-5 w-5 text-gray-500"
 											aria-hidden="true"
 										/>
@@ -86,7 +86,7 @@ export function SubmissionDetails({ submission }: Props): ReactElement {
 											showSnackbar("URL copied to clipboard.");
 										}}
 									>
-										<SmallLinkIcon
+										<SolidLinkIcon
 											className="-ml-1 mr-2 h-5 w-5 text-gray-500"
 											aria-hidden="true"
 										/>

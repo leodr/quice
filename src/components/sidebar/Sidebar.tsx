@@ -1,13 +1,13 @@
 import { Transition } from "@headlessui/react";
 import firebase from "firebase";
+import OutlineAtSymbolIcon from "heroicons/outline/at-symbol.svg";
+import OutlineInboxIcon from "heroicons/outline/inbox.svg";
+import SolidPlusIcon from "heroicons/solid/plus.svg";
 import { useRouter } from "next/router";
 import React, { ReactElement, useState } from "react";
 import { useFirestoreQuery } from "../../firebase/query";
 import { useAuth } from "../../lib/auth";
 import { Form } from "../../types/form";
-import { MediumAtSymbolIcon } from "../icons/medium/AtSymbol";
-import { MediumInboxIcon } from "../icons/medium/Inbox";
-import { SmallPlusIcon } from "../icons/small/Plus";
 import { Logo } from "../Logo";
 import { MenuLink } from "./MenuLink";
 import SecondaryLink from "./SecondaryLink";
@@ -147,10 +147,10 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 			{/* Navigation */}
 			<nav className="px-3 mt-6">
 				<div className="space-y-1">
-					<MenuLink href="/inbox" Icon={MediumInboxIcon}>
+					<MenuLink href="/inbox" Icon={OutlineInboxIcon}>
 						Inbox
 					</MenuLink>
-					<MenuLink href="/tasks" Icon={MediumAtSymbolIcon}>
+					<MenuLink href="/tasks" Icon={OutlineAtSymbolIcon}>
 						Assigned to me
 					</MenuLink>
 				</div>
@@ -230,7 +230,7 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 							href="/new-form"
 							leading={
 								<span className="w-2.5 h-2.5 mr-4 relative">
-									<SmallPlusIcon
+									<SolidPlusIcon
 										className="w-6 h-6 -top-2 -left-1.5 absolute text-gray-500 mr-4"
 										aria-hidden="true"
 									/>
