@@ -6,7 +6,7 @@ interface Props {
 	action?: ReactNode;
 }
 
-export function ListHeader({
+export default function ListHeader({
 	children,
 	headline,
 	action,

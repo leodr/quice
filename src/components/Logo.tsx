@@ -1,6 +1,6 @@
-import React, { SVGProps } from "react";
+import React, { ReactElement, SVGProps } from "react";
 
-export function Logo(props: SVGProps<SVGSVGElement>) {
+export default function Logo(props: SVGProps<SVGSVGElement>): ReactElement {
 	return (
 		<svg
 			viewBox="0 0 1024 778"

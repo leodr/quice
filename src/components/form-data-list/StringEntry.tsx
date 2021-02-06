@@ -1,21 +1,15 @@
-import React, { ReactElement, useMemo } from "react";
+import React, { ReactElement } from "react";
 import Linkify from "react-linkify";
-import { prettifyPropertyName } from "./propertyName";
 
-interface StringEntryProps {
+interface Props {
 	propertyName: string;
 	value: string;
 }
 
-export function StringEntry({
+export default function StringEntry({
 	propertyName,
 	value,
-}: StringEntryProps): ReactElement {
-	const prettifiedPropertyName = useMemo(
-		() => prettifyPropertyName(propertyName),
-		[propertyName]
-	);
-
+}: Props): ReactElement {
 	let displayValue = value.trim();
 
 	if (displayValue === "") {
@@ -24,9 +18,7 @@ export function StringEntry({
 
 	return (
 		<div className="sm:col-span-1">
-			<dt className="text-sm font-medium text-gray-500">
-				{prettifiedPropertyName}
-			</dt>
+			<dt className="text-sm font-medium text-gray-500">{propertyName}</dt>
 			<dd className="mt-1 text-sm text-gray-900">
 				<Linkify
 					componentDecorator={(href, text, key) => (

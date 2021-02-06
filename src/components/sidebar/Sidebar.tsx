@@ -1,28 +1,24 @@
 import { Transition } from "@headlessui/react";
-import firebase from "firebase";
 import OutlineAtSymbolIcon from "heroicons/outline/at-symbol.svg";
 import OutlineInboxIcon from "heroicons/outline/inbox.svg";
 import SolidPlusIcon from "heroicons/solid/plus.svg";
-import { useRouter } from "next/router";
 import React, { ReactElement, useState } from "react";
-import { useFirestoreQuery } from "../../firebase/query";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { firestore } from "src/firebase/client";
 import { useAuth } from "../../lib/auth";
 import { Form } from "../../types/form";
-import { Logo } from "../Logo";
-import { MenuLink } from "./MenuLink";
+import Logo from "../Logo";
+import MenuLink from "./MenuLink";
 import SecondaryLink from "./SecondaryLink";
 
-interface SidebarProps {}
-
-export default function Sidebar({}: SidebarProps): ReactElement {
+export default function Sidebar(): ReactElement {
 	const { user, signout } = useAuth();
-	const router = useRouter();
 
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [searchString, setSearchString] = useState("");
 
-	const forms = useFirestoreQuery<Form>(
-		user ? firebase.firestore().collection("forms").orderBy("name") : null
+	const [forms, loading, error] = useCollectionData<Form>(
+		user ? firestore.collection("forms").orderBy("name") : null
 	);
 
 	return (
@@ -202,7 +198,7 @@ export default function Sidebar({}: SidebarProps): ReactElement {
 						role="group"
 						aria-labelledby="teams-headline"
 					>
-						{forms.data
+						{forms
 							?.filter((form) => {
 								const name = form.name.toLowerCase();
 								const slug = form.slug.toLowerCase();

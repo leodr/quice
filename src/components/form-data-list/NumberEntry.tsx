@@ -1,7 +1,6 @@
-import React, { ReactElement, useMemo } from "react";
-import { prettifyPropertyName } from "./propertyName";
+import React, { ReactElement } from "react";
 
-interface NumberEntryProps {
+interface Props {
 	propertyName: string;
 	value: number;
 }
@@ -9,17 +8,10 @@ interface NumberEntryProps {
 export default function NumberEntry({
 	propertyName,
 	value,
-}: NumberEntryProps): ReactElement {
-	const prettifiedPropertyName = useMemo(
-		() => prettifyPropertyName(propertyName),
-		[propertyName]
-	);
-
+}: Props): ReactElement {
 	return (
 		<div className="sm:col-span-1">
-			<dt className="text-sm font-medium text-gray-500">
-				{prettifiedPropertyName}
-			</dt>
+			<dt className="text-sm font-medium text-gray-500">{propertyName}</dt>
 			<dd className="mt-1 text-sm text-gray-900">{value.toLocaleString()}</dd>
 		</div>
 	);

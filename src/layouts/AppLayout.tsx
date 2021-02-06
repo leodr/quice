@@ -1,15 +1,15 @@
 import { Transition } from "@headlessui/react";
 import OutlineMenuIcon from "heroicons/outline/menu.svg";
 import OutlineXIcon from "heroicons/outline/x.svg";
-import { ReactNode, useState } from "react";
-import { Logo } from "../components/Logo";
+import { ReactElement, ReactNode, useState } from "react";
+import Logo from "../components/Logo";
 import Sidebar from "../components/sidebar/Sidebar";
 
-interface AppLayoutProps {
+interface Props {
 	children: ReactNode;
 }
 
-export function AppLayout({ children }: AppLayoutProps) {
+export function AppLayout({ children }: Props): ReactElement {
 	const [showDrawer, setShowDrawer] = useState(false);
 
 	return (

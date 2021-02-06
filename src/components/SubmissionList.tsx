@@ -13,7 +13,7 @@ import { ReactElement, useMemo } from "react";
 import { GroupedVirtuoso } from "react-virtuoso";
 import { getSubmissionTitle } from "src/lib/submissionTitle";
 import { FormSubmission } from "src/types/form";
-import { Spinner } from "./Spinner";
+import Spinner from "./Spinner";
 
 interface Props {
 	submissions?: FormSubmission[];

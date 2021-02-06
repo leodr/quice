@@ -9,7 +9,11 @@ interface Props {
 	children: string;
 }
 
-export function MenuLink({ children, href, Icon }: Props): ReactElement {
+export default function MenuLink({
+	children,
+	href,
+	Icon,
+}: Props): ReactElement {
 	const router = useRouter();
 
 	const isSelected = router.asPath.startsWith(href);

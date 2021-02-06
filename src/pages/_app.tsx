@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ReactNode } from "react";
-import { ModalProvider } from "src/components/ModalProvider";
+import ModalProvider from "src/components/ModalProvider";
 import SnackbarProvider from "src/components/SnackbarProvider";
 import "tailwindcss/tailwind.css";
 import { ProvideAuth } from "../lib/auth";

@@ -2,12 +2,12 @@ import SolidCogIcon from "heroicons/solid/cog.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
-import { ListHeader } from "src/components/ListHeader";
-import { SubmissionDetails } from "src/components/SubmissionDetails";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import ListHeader from "src/components/ListHeader";
+import SubmissionDetails from "src/components/SubmissionDetails";
 import SubmissionList from "src/components/SubmissionList";
 import { firestore } from "src/firebase/client";
 import { useSubmissionQuery } from "src/firebase/infiniteQuery";
-import { useFirestoreQuery } from "src/firebase/query";
 import { AppLayout } from "src/layouts/AppLayout";
 import { Form } from "src/types/form";
 
@@ -16,13 +16,13 @@ export default function FormPage() {
 
 	const { formSlug, submissionId } = router.query;
 
-	const formState = useFirestoreQuery<Form>(
+	const [forms, loading, error] = useCollectionData<Form>(
 		formSlug
 			? firestore.collection("forms").where("slug", "==", formSlug)
 			: null
 	);
 
-	const form = formState.data?.[0];
+	const form = forms?.[0];
 
 	const { canLoadMore, loadMore, submissions } = useSubmissionQuery(
 		form

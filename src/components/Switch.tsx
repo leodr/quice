@@ -7,7 +7,11 @@ interface Props {
 	label: string;
 }
 
-export function Switch({ onChange, value, label }: Props): ReactElement {
+export default function Switch({
+	onChange,
+	value,
+	label,
+}: Props): ReactElement {
 	return (
 		<button
 			type="button"

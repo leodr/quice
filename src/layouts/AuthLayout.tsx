@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode } from "react";
-import { Logo } from "../components/Logo";
+import Logo from "../components/Logo";
 
-interface AuthLayoutProps {
+interface Props {
 	headline: string;
 	subheadline: ReactNode;
 	children: ReactNode;
@@ -11,7 +11,7 @@ export function AuthLayout({
 	children,
 	headline,
 	subheadline,
-}: AuthLayoutProps): ReactElement {
+}: Props): ReactElement {
 	return (
 		<div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 			<div className="sm:mx-auto sm:w-full sm:max-w-md">

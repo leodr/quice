@@ -2,8 +2,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import SolidCheckIcon from "heroicons/solid/check.svg";
 import SolidXIcon from "heroicons/solid/x.svg";
 import { ReactNode, SyntheticEvent, useState } from "react";
-import { Logo } from "src/components/Logo";
-import { Spinner } from "src/components/Spinner";
+import Logo from "src/components/Logo";
+import Spinner from "src/components/Spinner";
 import { useAuth } from "src/lib/auth";
 import { PromiseStatus } from "src/types/promise-status";
 

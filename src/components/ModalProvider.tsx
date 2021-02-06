@@ -44,7 +44,7 @@ type State =
 			resolveFn: (value: boolean) => void;
 	  } & DialogOptions);
 
-export function ModalProvider({ children }: Props): ReactElement {
+export default function ModalProvider({ children }: Props): ReactElement {
 	const [dialogState, setDialogState] = useState<State>({ state: "closed" });
 
 	const openModal = useCallback(

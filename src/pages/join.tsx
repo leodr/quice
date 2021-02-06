@@ -3,7 +3,7 @@ import SolidCheckIcon from "heroicons/solid/check.svg";
 import SolidXIcon from "heroicons/solid/x.svg";
 import Link from "next/link";
 import { ReactNode, SyntheticEvent, useState } from "react";
-import { Spinner } from "../components/Spinner";
+import Spinner from "../components/Spinner";
 import { AuthLayout } from "../layouts/AuthLayout";
 import { useAuth } from "../lib/auth";
 import { PromiseStatus } from "../types/promise-status";

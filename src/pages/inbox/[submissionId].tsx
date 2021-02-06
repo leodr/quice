@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
-import { ListHeader } from "src/components/ListHeader";
-import { SubmissionDetails } from "src/components/SubmissionDetails";
+import ListHeader from "src/components/ListHeader";
+import SubmissionDetails from "src/components/SubmissionDetails";
 import SubmissionList from "src/components/SubmissionList";
 import { firestore } from "src/firebase/client";
 import { useSubmissionQuery } from "src/firebase/infiniteQuery";

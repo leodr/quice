@@ -4,16 +4,16 @@ import SolidArrowLeftIcon from "heroicons/solid/arrow-left.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Controller, useForm } from "react-hook-form";
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
 import js from "react-syntax-highlighter/dist/cjs/languages/hljs/javascript";
 import codeTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/github-gist";
-import { ColorSelect } from "src/components/ColorSelect";
+import ColorSelect from "src/components/ColorSelect";
 import { useModal } from "src/components/ModalProvider";
 import { useSnack } from "src/components/SnackbarProvider";
-import { Switch } from "src/components/Switch";
+import Switch from "src/components/Switch";
 import { firestore } from "src/firebase/client";
-import { useFirestoreQuery } from "src/firebase/query";
 import { useHost } from "src/hooks/useHost";
 import { AppLayout } from "src/layouts/AppLayout";
 import { Form, FormColor } from "src/types/form";
@@ -45,7 +45,7 @@ export default function FormSettingsPage() {
 
 	const { tab, formSlug } = router.query;
 
-	const { data } = useFirestoreQuery<Form>(
+	const [forms, loading, error] = useCollectionData<Form>(
 		formSlug
 			? firestore.collection("forms").where("slug", "==", formSlug)
 			: null
@@ -54,12 +54,12 @@ export default function FormSettingsPage() {
 	const showSnackbar = useSnack();
 
 	useEffect(() => {
-		if (data) {
-			setValue("name", data[0].name);
-			setValue("description", data[0].description);
-			setValue("color", data[0].color);
+		if (forms) {
+			setValue("name", forms[0].name);
+			setValue("description", forms[0].description);
+			setValue("color", forms[0].color);
 		}
-	}, [data, setValue]);
+	}, [forms, setValue]);
 
 	async function onSubmit(data: CreateFormForm) {
 		const { color, description, name } = data;
@@ -141,7 +141,7 @@ export default function FormSettingsPage() {
 								background: null,
 							}}
 						>{`async function handleFormSubmission(data) {
-    const response = await fetch("https://${host}/api/forms/${data?.[0]?.id}/submissions", {
+    const response = await fetch("https://${host}/api/forms/${forms?.[0]?.id}/submissions", {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
@@ -182,7 +182,7 @@ export default function FormSettingsPage() {
 								});
 
 								if (result) {
-									const response = await fetch(`/api/forms/${data?.[0].id}`, {
+									const response = await fetch(`/api/forms/${forms?.[0].id}`, {
 										method: "DELETE",
 									});
 

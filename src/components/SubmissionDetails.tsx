@@ -8,14 +8,14 @@ import React, { ReactElement, useState } from "react";
 import { firestore } from "src/firebase/client";
 import { getSubmissionTitle } from "src/lib/submissionTitle";
 import { FormSubmission } from "src/types/form";
-import { DataList } from "./form-data-list/DataList";
+import DataList from "./form-data-list/DataList";
 import { useSnack } from "./SnackbarProvider";
 
 interface Props {
 	submission: FormSubmission | null;
 }
 
-export function SubmissionDetails({ submission }: Props): ReactElement {
+export default function SubmissionDetails({ submission }: Props): ReactElement {
 	const [showDropdown, setShowDropdown] = useState(false);
 
 	const showSnackbar = useSnack();
