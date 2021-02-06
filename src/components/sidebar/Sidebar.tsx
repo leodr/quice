@@ -1,26 +1,32 @@
-import { Transition } from "@headlessui/react";
 import OutlineAtSymbolIcon from "heroicons/outline/at-symbol.svg";
 import OutlineInboxIcon from "heroicons/outline/inbox.svg";
 import SolidPlusIcon from "heroicons/solid/plus.svg";
 import SolidSearchIcon from "heroicons/solid/search.svg";
-import SolidSelectorIcon from "heroicons/solid/selector.svg";
-import React, { ChangeEvent, ReactElement, useState } from "react";
+import React, { ChangeEvent, ReactElement, useMemo, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { firestore } from "src/firebase/client";
-import { useAuth } from "../../lib/auth";
 import { Form } from "../../types/form";
 import Logo from "../Logo";
 import PrimaryLink from "./PrimaryLink";
 import SecondaryLink from "./SecondaryLink";
+import UserMenu from "./UserMenu";
 
 export default function Sidebar(): ReactElement {
-  const { user, signout } = useAuth();
-
-  const [showDropdown, setShowDropdown] = useState(false);
   const [formQuery, setFormQuery] = useState("");
 
   const [forms, loading, error] = useCollectionData<Form>(
-    user ? firestore.collection("forms").orderBy("name") : null
+    firestore.collection("forms").orderBy("name"),
+    { idField: "id" }
+  );
+
+  const filteredForms = useMemo(
+    () =>
+      forms?.filter(
+        ({ name, slug }) =>
+          name.toLowerCase().includes(formQuery) ||
+          slug.toLowerCase().includes(formQuery)
+      ),
+    [formQuery, forms]
   );
 
   function handleFormSearchChange(event: ChangeEvent<HTMLInputElement>) {
@@ -29,113 +35,10 @@ export default function Sidebar(): ReactElement {
 
   return (
     <div className="h-0 flex-1 flex flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
-      <div className="flex items-center flex-shrink-0 px-6 space-x-4">
+      <div className="flex items-center flex-shrink-0 px-7 space-x-4">
         <Logo className="w-8 h-8 text-rose-500" />
-        <h1 className="font-extrabold tracking-tight text-2xl text-gray-700">
-          Quice
-        </h1>
       </div>
-      {/* User account dropdown */}
-      <div className="px-3 mt-6 relative inline-block text-left">
-        {/* Dropdown menu toggle, controlling the show/hide state of dropdown menu. */}
-        <div>
-          <button
-            type="button"
-            className="group w-full bg-gray-100 rounded-md px-3.5 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500"
-            id="options-menu"
-            aria-haspopup="true"
-            aria-expanded="true"
-            onClick={() => setShowDropdown(!showDropdown)}
-          >
-            <span className="flex w-full justify-between items-center">
-              <span className="flex min-w-0 items-center justify-between space-x-3">
-                <img
-                  className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
-                  src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
-                  alt=""
-                />
-                <span className="flex-1 min-w-0">
-                  <span className="text-gray-900 text-sm font-medium truncate">
-                    Jessy Schwarz
-                  </span>
-                  <br />
-                  <span className="text-gray-500 text-sm truncate">
-                    @jessyschwarz
-                  </span>
-                </span>
-              </span>
-              <SolidSelectorIcon
-                className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                aria-hidden="true"
-              />
-            </span>
-          </button>
-        </div>
-        {/* Dropdown panel, show/hide based on dropdown state. */}
-        <Transition
-          show={showDropdown}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-          className="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200"
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="options-menu"
-        >
-          <div className="py-1">
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-            >
-              View profile
-            </a>
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-            >
-              Settings
-            </a>
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-            >
-              Notifications
-            </a>
-          </div>
-          <div className="py-1">
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-            >
-              Get desktop app
-            </a>
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-            >
-              Support
-            </a>
-          </div>
-          <div className="py-1">
-            <button
-              onClick={() => signout()}
-              className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-            >
-              Logout
-            </button>
-          </div>
-        </Transition>
-      </div>
-
+      <UserMenu />
       {/* Navigation */}
       <nav className="px-3 mt-6">
         <div className="space-y-1">
@@ -184,34 +87,26 @@ export default function Sidebar(): ReactElement {
             role="group"
             aria-labelledby="teams-headline"
           >
-            {forms
-              ?.filter((form) => {
-                const name = form.name.toLowerCase();
-                const slug = form.slug.toLowerCase();
-                const query = formQuery.toLowerCase();
-
-                return name.includes(query) || slug.includes(query);
-              })
-              .map((form) => (
-                <SecondaryLink
-                  key={form.id}
-                  href={`/${form.slug}`}
-                  leading={
-                    <span
-                      className={`w-2.5 h-2.5 mr-4 bg-${form.color}-500 rounded-full`}
-                      aria-hidden="true"
-                    ></span>
-                  }
-                >
-                  {form.name}
-                </SecondaryLink>
-              ))}
+            {filteredForms?.map((form) => (
+              <SecondaryLink
+                key={form.id}
+                href={`/${form.slug}`}
+                leading={
+                  <span
+                    className={`w-2.5 h-2.5 mr-4 bg-${form.color}-500 rounded-full`}
+                    aria-hidden="true"
+                  ></span>
+                }
+              >
+                {form.name}
+              </SecondaryLink>
+            ))}
             <SecondaryLink
               href="/new-form"
               leading={
                 <span className="w-2.5 h-2.5 mr-4 relative">
                   <SolidPlusIcon
-                    className="w-6 h-6 -top-2 -left-1.5 absolute text-gray-500 mr-4"
+                    className="w-6 h-6 -top-2 -left-1.5 absolute text-gray-400 mr-4"
                     aria-hidden="true"
                   />
                 </span>

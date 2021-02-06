@@ -5,27 +5,32 @@ service cloud.firestore {
             allow read, write: if false;
         }
         
-        function isUserOwner(form) {
-            return form.data.owner.type == 'user'
-                    && form.data.owner.id == request.auth.uid;
-        } 
-
-        match /forms/{formId} {
-            allow read: if isUserOwner(resource);
-            
-            allow write: if false;
+        function isUserPermitted() {
+            let authDoc = get(/databases/$(database)/documents/auth/authorizedUsers);
+        
+            return authDoc.data.emails.hasAll([request.auth.token.email]);
         }
-        
-        function hasAccessToSubmission(formId) {
-            let form = get(/databases/$(database)/documents/forms/$(formId));
-        
-            return isUserOwner(form);
+    
+        match /forms/{formId} {
+            allow read: if isUserPermitted();
+            
+            allow write: if isUserPermitted();
         }
         
         match /submissions/{submissionId} {
-            allow read: if hasAccessToSubmission(resource.data.formId);
+            allow read: if isUserPermitted();
         
-            allow write: if false;
+            allow write: if isUserPermitted();
+        }
+        
+        function isRequestUser(userId) {
+            return userId == request.auth.uid;
+        }
+        
+        match /users/{userId} {
+            allow read: if isRequestUser(userId);
+        
+            allow write: if isRequestUser(userId);
         }
     }
 }
