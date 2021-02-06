@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
+		"analyze-build": "cross-env ANALYZE=true yarn build",
 		"build": "next build",
 		"check-types": "tsc",
 		"dev": "next dev",
@@ -17,6 +18,7 @@
 		"@nestjs/config": "^0.6.3",
 		"@nestjs/core": "^7.6.11",
 		"@nestjs/platform-express": "^7.6.11",
+		"@next/bundle-analyzer": "^10.0.6",
 		"@tailwindcss/forms": "^0.2.1",
 		"autoprefixer": "^10.2.4",
 		"clsx": "^1.1.1",
