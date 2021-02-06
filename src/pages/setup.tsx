@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import SolidCheckIcon from "heroicons/solid/check.svg";
+import SolidSortAscendingIcon from "heroicons/solid/sort-ascending.svg";
 import SolidXIcon from "heroicons/solid/x.svg";
 import { ReactNode, SyntheticEvent, useState } from "react";
 import Logo from "src/components/Logo";
@@ -217,16 +218,10 @@ export default function SetupPage() {
                   />
                 </div>
                 <button className="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-rose-400 focus:border-rose-400">
-                  {/* Heroicon name: solid/sort-ascending */}
-                  <svg
+                  <SolidSortAscendingIcon
                     className="h-5 w-5 text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
                     aria-hidden="true"
-                  >
-                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-                  </svg>
+                  />
                   <span>Allow</span>
                 </button>
               </div>

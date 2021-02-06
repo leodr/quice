@@ -2,24 +2,30 @@ import { Transition } from "@headlessui/react";
 import OutlineAtSymbolIcon from "heroicons/outline/at-symbol.svg";
 import OutlineInboxIcon from "heroicons/outline/inbox.svg";
 import SolidPlusIcon from "heroicons/solid/plus.svg";
-import React, { ReactElement, useState } from "react";
+import SolidSearchIcon from "heroicons/solid/search.svg";
+import SolidSelectorIcon from "heroicons/solid/selector.svg";
+import React, { ChangeEvent, ReactElement, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { firestore } from "src/firebase/client";
 import { useAuth } from "../../lib/auth";
 import { Form } from "../../types/form";
 import Logo from "../Logo";
-import MenuLink from "./MenuLink";
+import PrimaryLink from "./PrimaryLink";
 import SecondaryLink from "./SecondaryLink";
 
 export default function Sidebar(): ReactElement {
   const { user, signout } = useAuth();
 
   const [showDropdown, setShowDropdown] = useState(false);
-  const [searchString, setSearchString] = useState("");
+  const [formQuery, setFormQuery] = useState("");
 
   const [forms, loading, error] = useCollectionData<Form>(
     user ? firestore.collection("forms").orderBy("name") : null
   );
+
+  function handleFormSearchChange(event: ChangeEvent<HTMLInputElement>) {
+    setFormQuery(event.target.value.toLowerCase());
+  }
 
   return (
     <div className="h-0 flex-1 flex flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
@@ -58,20 +64,10 @@ export default function Sidebar(): ReactElement {
                   </span>
                 </span>
               </span>
-              {/* Heroicon name: selector */}
-              <svg
+              <SolidSelectorIcon
                 className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
                 aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              />
             </span>
           </button>
         </div>
@@ -143,12 +139,12 @@ export default function Sidebar(): ReactElement {
       {/* Navigation */}
       <nav className="px-3 mt-6">
         <div className="space-y-1">
-          <MenuLink href="/inbox" Icon={OutlineInboxIcon}>
+          <PrimaryLink href="/inbox" Icon={OutlineInboxIcon}>
             Inbox
-          </MenuLink>
-          <MenuLink href="/tasks" Icon={OutlineAtSymbolIcon}>
+          </PrimaryLink>
+          <PrimaryLink href="/tasks" Icon={OutlineAtSymbolIcon}>
             Assigned to me
-          </MenuLink>
+          </PrimaryLink>
         </div>
         <div className="mt-8">
           {/* Secondary navigation */}
@@ -167,20 +163,10 @@ export default function Sidebar(): ReactElement {
                 className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
                 aria-hidden="true"
               >
-                {/* Heroicon name: search */}
-                <svg
+                <SolidSearchIcon
                   className="mr-3 h-4 w-4 text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
                   aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                />
               </div>
               <input
                 type="text"
@@ -188,8 +174,8 @@ export default function Sidebar(): ReactElement {
                 id="search"
                 className="focus:ring-rose-400 focus:border-rose-400 block w-full pl-9 sm:text-sm border-gray-300 rounded-md"
                 placeholder="Search"
-                value={searchString}
-                onChange={(e) => setSearchString(e.target.value)}
+                value={formQuery}
+                onChange={handleFormSearchChange}
               />
             </div>
           </div>
@@ -202,26 +188,24 @@ export default function Sidebar(): ReactElement {
               ?.filter((form) => {
                 const name = form.name.toLowerCase();
                 const slug = form.slug.toLowerCase();
-                const query = searchString.toLowerCase();
+                const query = formQuery.toLowerCase();
 
                 return name.includes(query) || slug.includes(query);
               })
-              .map((form) => {
-                return (
-                  <SecondaryLink
-                    key={form.id}
-                    href={`/${form.slug}`}
-                    leading={
-                      <span
-                        className={`w-2.5 h-2.5 mr-4 bg-${form.color}-500 rounded-full`}
-                        aria-hidden="true"
-                      ></span>
-                    }
-                  >
-                    {form.name}
-                  </SecondaryLink>
-                );
-              })}
+              .map((form) => (
+                <SecondaryLink
+                  key={form.id}
+                  href={`/${form.slug}`}
+                  leading={
+                    <span
+                      className={`w-2.5 h-2.5 mr-4 bg-${form.color}-500 rounded-full`}
+                      aria-hidden="true"
+                    ></span>
+                  }
+                >
+                  {form.name}
+                </SecondaryLink>
+              ))}
             <SecondaryLink
               href="/new-form"
               leading={

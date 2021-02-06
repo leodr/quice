@@ -1,13 +1,16 @@
 import { Transition } from "@headlessui/react";
 import clsx from "clsx";
+import SolidBanIcon from "heroicons/solid/ban.svg";
+import SolidCheckIcon from "heroicons/solid/check.svg";
+import SolidChevronDownIcon from "heroicons/solid/chevron-down.svg";
 import SolidClockIcon from "heroicons/solid/clock.svg";
 import SolidHashtagIcon from "heroicons/solid/hashtag.svg";
 import SolidLinkIcon from "heroicons/solid/link.svg";
 import SolidUserAddIcon from "heroicons/solid/user-add.svg";
 import React, { ReactElement, useState } from "react";
 import { firestore } from "src/firebase/client";
-import { getSubmissionTitle } from "src/lib/submissionTitle";
 import { FormSubmission } from "src/types/form";
+import { getSubmissionTitle } from "src/utils/getSubmissionTitle";
 import DataList from "./form-data-list/DataList";
 import { useSnack } from "./SnackbarProvider";
 
@@ -104,35 +107,16 @@ export default function SubmissionDetails({ submission }: Props): ReactElement {
                     )}
                     onClick={handleMarkAsDone}
                   >
-                    {/* Heroicon name: check */}
                     {submission?.done ? (
-                      <svg
+                      <SolidCheckIcon
                         className="-ml-1 mr-2 h-5 w-5"
                         aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                      />
                     ) : (
-                      <svg
+                      <SolidBanIcon
                         className="-ml-1 mr-2 h-5 w-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
                         aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                      />
                     )}
                     {submission?.done ? "Mark as undone" : "Mark as done"}
                   </button>
@@ -147,20 +131,10 @@ export default function SubmissionDetails({ submission }: Props): ReactElement {
                     onClick={() => setShowDropdown(!showDropdown)}
                   >
                     More
-                    {/* Heroicon name: chevron-down */}
-                    <svg
+                    <SolidChevronDownIcon
                       className="-mr-1 ml-2 h-5 w-5 text-gray-500"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
                       aria-hidden="true"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    />
                   </button>
                   <Transition
                     show={showDropdown}
