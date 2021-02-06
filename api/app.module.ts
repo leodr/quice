@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
+import { FormsModule } from "./forms/forms.module";
 import { SubmissionModule } from "./submission/submission.module";
 import { TokenModule } from "./token/token.module";
 
@@ -12,6 +13,7 @@ import { TokenModule } from "./token/token.module";
 			ignoreEnvFile: true,
 		}),
 		TokenModule,
+		FormsModule,
 	],
 	controllers: [],
 	providers: [],
