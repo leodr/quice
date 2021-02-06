@@ -1,5 +1,7 @@
 import { Transition } from "@headlessui/react";
+import clsx from "clsx";
 import React, { ReactElement, useState } from "react";
+import { firestore } from "src/firebase/client";
 import { getSubmissionTitle } from "src/lib/submissionTitle";
 import { FormSubmission } from "src/types/form";
 import { DataList } from "./form-data-list/DataList";
@@ -7,6 +9,7 @@ import { SmallClockIcon } from "./icons/small/Clock";
 import { SmallHashtagIcon } from "./icons/small/Hashtag";
 import { SmallLinkIcon } from "./icons/small/Link";
 import { SmallUserAddIcon } from "./icons/small/UserAdd";
+import { useSnack } from "./SnackbarProvider";
 
 interface Props {
 	submission: FormSubmission | null;
@@ -25,6 +28,13 @@ export function SubmissionDetails({ submission }: Props): ReactElement {
 				</p>
 			</div>
 		);
+
+	function handleMarkAsDone() {
+		firestore
+			.collection("submissions")
+			.doc(submission?.id)
+			.update({ done: !submission?.done });
+	}
 
 	return (
 		<article>
@@ -86,23 +96,45 @@ export function SubmissionDetails({ submission }: Props): ReactElement {
 								<span className="sm:ml-3">
 									<button
 										type="button"
-										className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400"
+										className={clsx(
+											"inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-400",
+											submission?.done
+												? "border-gray-300 bg-white hover:bg-gray-50 text-gray-700"
+												: "bg-rose-500 hover:bg-rose-600 text-white"
+										)}
+										onClick={handleMarkAsDone}
 									>
 										{/* Heroicon name: check */}
-										<svg
-											className="-ml-1 mr-2 h-5 w-5"
-											xmlns="http://www.w3.org/2000/svg"
-											viewBox="0 0 20 20"
-											fill="currentColor"
-											aria-hidden="true"
-										>
-											<path
-												fillRule="evenodd"
-												d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-												clipRule="evenodd"
-											/>
-										</svg>
-										Mark as done
+										{submission?.done ? (
+											<svg
+												className="-ml-1 mr-2 h-5 w-5"
+												aria-hidden="true"
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 20 20"
+												fill="currentColor"
+											>
+												<path
+													fillRule="evenodd"
+													d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
+													clipRule="evenodd"
+												/>
+											</svg>
+										) : (
+											<svg
+												className="-ml-1 mr-2 h-5 w-5"
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 20 20"
+												fill="currentColor"
+												aria-hidden="true"
+											>
+												<path
+													fillRule="evenodd"
+													d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+													clipRule="evenodd"
+												/>
+											</svg>
+										)}
+										{submission?.done ? "Mark as undone" : "Mark as done"}
 									</button>
 								</span>
 								{/* Dropdown */}

@@ -11,7 +11,10 @@ export default function InboxPage() {
 	const router = useRouter();
 
 	const { canLoadMore, loadMore, submissions } = useSubmissionQuery(
-		firestore.collection("submissions").orderBy("createdAt", "desc")
+		firestore
+			.collection("submissions")
+			.where("done", "==", false)
+			.orderBy("createdAt", "desc")
 	);
 
 	const selectedSubmission =
