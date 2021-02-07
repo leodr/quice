@@ -25,7 +25,7 @@ export default function SecondaryLink({
 
   return (
     <Link href={href}>
-      <a type="button" className={linkClasses}>
+      <a className={linkClasses}>
         {leading}
         <span className="truncate">{children}</span>
       </a>
