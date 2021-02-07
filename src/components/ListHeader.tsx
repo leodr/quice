@@ -17,7 +17,7 @@ export default function ListHeader({
         <h2 className="text-lg font-medium text-gray-900">{headline}</h2>
         {action}
       </div>
-      <p className="mt-1 text-sm text-gray-600">{children}</p>
+      <p className="mt-3 text-sm text-gray-600">{children}</p>
     </div>
   );
 }
