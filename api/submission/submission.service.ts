@@ -27,7 +27,6 @@ export class SubmissionService {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       data,
       formId,
-      readAt: null,
       done: false,
     });
   }

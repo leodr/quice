@@ -16,13 +16,12 @@ export interface Form extends FirebaseDoc {
   name: string;
   description: string;
   slug: string;
-  allowSubmissions?: boolean;
+  allowSubmissions: boolean;
 }
 
 export interface FormSubmission extends FirebaseDoc {
   createdAt: firebase.firestore.Timestamp;
   data: JsonObject;
   formId: string;
-  readAt?: firebase.firestore.Timestamp;
-  done?: boolean;
+  done: boolean;
 }

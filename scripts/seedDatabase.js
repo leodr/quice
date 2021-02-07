@@ -1,8 +1,7 @@
+require("dotenv").config({ path: ".env.local" });
 const admin = require("firebase-admin");
 const faker = require("faker");
-require("dotenv").config({ path: ".env.local" });
-const { prompt } = require("enquirer");
-const { subMonths } = require("date-fns");
+const { subMonths, isToday } = require("date-fns");
 
 admin.initializeApp({
   credential: admin.credential.cert({
@@ -15,32 +14,36 @@ admin.initializeApp({
 const firestore = admin.firestore();
 
 async function seed() {
-  const { testUserId } = await prompt({
-    type: "input",
-    name: "testUserId",
-    message: "Enter the ID of the test user",
-  });
-
   const forms = [
     {
       name: "Sales Contact",
+      slug: "sales-contact",
+      description: "The sales contact form, found at acme.org/pricing.",
+      allowSubmissions: true,
       color: "orange",
-      owner: { type: "user", id: testUserId },
     },
     {
       name: "Feedback (On-Site)",
+      slug: "feedback-on-site",
+      description:
+        "The small text field for feedback found at the top of every of our pages.",
+      allowSubmissions: true,
       color: "green",
-      owner: { type: "user", id: testUserId },
     },
     {
       name: "General Contact",
+      slug: "general-contact",
+      description: "Our general contact form, found under acme.org/contact.",
+      allowSubmissions: true,
       color: "indigo",
-      owner: { type: "user", id: testUserId },
     },
     {
       name: "Personal Get in Touch",
+      slug: "personal-get-in-touch",
+      description:
+        "The personal contact form for Leo Driesch, found at acme.org/about.",
+      allowSubmissions: true,
       color: "pink",
-      owner: { type: "user", id: testUserId },
     },
   ];
 
@@ -78,7 +81,7 @@ async function seed() {
     const submission = {
       createdAt: admin.firestore.Timestamp.fromDate(submissionDate),
       formId: salesForm.id,
-      readAt: null,
+      done: !isToday(submissionDate),
       data: {
         email: faker.internet.email(),
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
@@ -122,7 +125,7 @@ async function seed() {
     const submission = {
       createdAt: admin.firestore.Timestamp.fromDate(submissionDate),
       formId: feedbackForm.id,
-      readAt: null,
+      done: !isToday(submissionDate),
       data: {
         feedback: faker.lorem.sentences(),
       },
@@ -152,7 +155,7 @@ async function seed() {
     const submission = {
       createdAt: admin.firestore.Timestamp.fromDate(submissionDate),
       formId: contactForm.id,
-      readAt: null,
+      done: !isToday(submissionDate),
       data: {
         email: faker.internet.email(),
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
@@ -196,7 +199,7 @@ async function seed() {
     const submission = {
       createdAt: admin.firestore.Timestamp.fromDate(submissionDate),
       formId: personalForm.id,
-      readAt: null,
+      done: !isToday(submissionDate),
       data: {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
