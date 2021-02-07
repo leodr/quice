@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import Linkify from "src/components/Linkify";
 import ListHeader from "src/components/ListHeader";
 import SubmissionDetails from "src/components/SubmissionDetails";
 import SubmissionList from "src/components/SubmissionList";
@@ -76,7 +77,7 @@ export default function FormPage() {
             </Link>
           }
         >
-          {form?.description ?? ""}
+          <Linkify>{form?.description ?? ""}</Linkify>
         </ListHeader>
         {submissions && (
           <SubmissionList
