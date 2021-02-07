@@ -1,21 +1,31 @@
 import { Transition } from "@headlessui/react";
 import SolidSelectorIcon from "heroicons/solid/selector.svg";
+import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import { useDocumentData } from "react-firebase-hooks/firestore";
-import { firestore } from "src/firebase/client";
+import { auth, firestore } from "src/firebase";
+import { useAuthState } from "src/hooks/useAuthState";
 import { useDropdown } from "src/hooks/useDropdown";
-import { useAuth } from "src/lib/auth";
 import { User } from "src/types/user";
 
 export default function UserMenu(): ReactElement {
-  const { user, signout } = useAuth();
+  const router = useRouter();
+  const user = useAuthState();
 
   const [userData] = useDocumentData<User>(
     user ? firestore.collection("users").doc(user.uid) : null,
     { idField: "id" }
   );
 
+  const initials =
+    userData && userData.firstName.charAt(0) + userData.lastName.charAt(0);
+
   const [showDropdown, setShowDropdown, containerProps] = useDropdown();
+
+  async function handleSignOut() {
+    await auth.signOut();
+    router.push("/login");
+  }
 
   return (
     <div
@@ -37,9 +47,7 @@ export default function UserMenu(): ReactElement {
               className="w-10 h-10 bg-teal-200 bg-opacity-75 text-teal-700 font-bold tracking-wide rounded-full flex-shrink-0 flex items-center justify-center"
               aria-hidden="true"
             >
-              {`${userData?.firstName.charAt(0)}${userData?.lastName.charAt(
-                0
-              )}`}
+              {initials}
             </div>
             <span className="flex-1 min-w-0">
               <span className="text-gray-900 text-sm font-medium truncate block">
@@ -83,7 +91,7 @@ export default function UserMenu(): ReactElement {
 
         <div className="py-1">
           <button
-            onClick={() => signout()}
+            onClick={handleSignOut}
             className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             role="menuitem"
           >

@@ -5,7 +5,7 @@ import SolidSelectorIcon from "heroicons/solid/selector.svg";
 import React, { ReactElement } from "react";
 import { FormColor } from "src/types/form";
 
-const colors: FormColor[] = [
+const colorChoices: FormColor[] = [
   "green",
   "indigo",
   "orange",
@@ -54,7 +54,7 @@ export default function ColorSelect({ open, color }: Props): ReactElement {
           static
           className="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
         >
-          {colors.map((color) => (
+          {colorChoices.map((color) => (
             <Listbox.Option
               key={color}
               value={color}

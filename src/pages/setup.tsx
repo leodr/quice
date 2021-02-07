@@ -5,7 +5,7 @@ import SolidXIcon from "heroicons/solid/x.svg";
 import { ReactNode, SyntheticEvent, useState } from "react";
 import Logo from "src/components/Logo";
 import Spinner from "src/components/Spinner";
-import { useAuth } from "src/lib/auth";
+import { auth, firestore } from "src/firebase";
 import { PromiseStatus } from "src/types/promiseStatus";
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -24,8 +24,6 @@ export default function SetupPage() {
   const [step, setStep] = useState<Step>("add-members");
   const [allowedEmails, setAllowedEmails] = useState<string[]>([]);
 
-  const { signup } = useAuth();
-
   const [submissionState, setSubmissionState] = useState<PromiseStatus>("idle");
 
   async function handleLoginFormSubmit(
@@ -42,12 +40,19 @@ export default function SetupPage() {
 
     setSubmissionState("pending");
     try {
-      await signup({
-        email: email.value,
-        password: password.value,
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email.value,
+        password.value
+      );
+
+      if (!user) throw Error("User object is null.");
+
+      await firestore.collection("users").doc(user?.uid).set({
         firstName: firstName.value,
         lastName: lastName.value,
+        emailAddress: email.value,
       });
+
       setSubmissionState("fulfilled");
       setAllowedEmails([email.value]);
       setStep("add-members");

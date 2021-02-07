@@ -7,8 +7,8 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import ListHeader from "src/components/ListHeader";
 import SubmissionDetails from "src/components/SubmissionDetails";
 import SubmissionList from "src/components/SubmissionList";
-import { firestore } from "src/firebase/client";
-import { useSubmissionQuery } from "src/firebase/infiniteQuery";
+import { firestore } from "src/firebase";
+import { useSubmissionQuery } from "src/hooks/useSubmissionQuery";
 import { AppLayout } from "src/layouts/AppLayout";
 import { Form } from "src/types/form";
 

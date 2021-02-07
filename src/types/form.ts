@@ -1,5 +1,5 @@
 import type { JsonObject } from "type-fest";
-import type { firebase } from "../firebase/client";
+import type { firebase } from "../firebase";
 import { FirebaseDoc } from "./firebase";
 
 export type FormColor =

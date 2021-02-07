@@ -2,10 +2,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import SolidCheckIcon from "heroicons/solid/check.svg";
 import SolidXIcon from "heroicons/solid/x.svg";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { ReactNode, SyntheticEvent, useState } from "react";
+import { auth, firestore } from "src/firebase";
 import Spinner from "../components/Spinner";
 import { AuthLayout } from "../layouts/AuthLayout";
-import { useAuth } from "../lib/auth";
 import { PromiseStatus } from "../types/promiseStatus";
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -19,8 +20,7 @@ interface LoginFormElement extends HTMLFormElement {
 }
 
 export default function JoinPage() {
-  const { signup } = useAuth();
-
+  const router = useRouter();
   const [submissionState, setSubmissionState] = useState<PromiseStatus>("idle");
 
   async function handleLoginFormSubmit(
@@ -37,16 +37,22 @@ export default function JoinPage() {
 
     setSubmissionState("pending");
     try {
-      await signup(
-        {
-          email: email.value,
-          password: password.value,
-          firstName: firstName.value,
-          lastName: lastName.value,
-        },
-        "/inbox"
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email.value,
+        password.value
       );
+
+      if (!user) throw Error("User object is null.");
+
+      await firestore.collection("users").doc(user?.uid).set({
+        firstName: firstName.value,
+        lastName: lastName.value,
+        emailAddress: email.value,
+      });
+
       setSubmissionState("fulfilled");
+
+      router.push("/inbox");
     } catch {
       setSubmissionState("rejected");
     }

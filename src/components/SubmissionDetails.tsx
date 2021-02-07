@@ -8,7 +8,7 @@ import SolidHashtagIcon from "heroicons/solid/hashtag.svg";
 import SolidLinkIcon from "heroicons/solid/link.svg";
 import SolidUserAddIcon from "heroicons/solid/user-add.svg";
 import React, { ReactElement, useState } from "react";
-import { firestore } from "src/firebase/client";
+import { firestore } from "src/firebase";
 import { FormSubmission } from "src/types/form";
 import { getSubmissionTitle } from "src/utils/getSubmissionTitle";
 import DataList from "./form-data-list/DataList";
@@ -108,12 +108,12 @@ export default function SubmissionDetails({ submission }: Props): ReactElement {
                     onClick={handleMarkAsDone}
                   >
                     {submission?.done ? (
-                      <SolidCheckIcon
+                      <SolidBanIcon
                         className="-ml-1 mr-2 h-5 w-5"
                         aria-hidden="true"
                       />
                     ) : (
-                      <SolidBanIcon
+                      <SolidCheckIcon
                         className="-ml-1 mr-2 h-5 w-5"
                         aria-hidden="true"
                       />

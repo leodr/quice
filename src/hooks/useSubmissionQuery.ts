@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useMemoCompare } from "src/hooks/memoCompare";
+import { useMemoCompare } from "src/hooks/useMemoCompare";
 import { FormSubmission } from "src/types/form";
-import { firebase } from "./client";
+import { firebase } from "../firebase";
 
+/**
+ * Subscribes to a submission query and supports endless scrolling.
+ */
 export function useSubmissionQuery(
   orderedQuery: firebase.firestore.Query | null,
   chunkSize = 20

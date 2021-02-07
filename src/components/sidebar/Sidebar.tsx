@@ -2,9 +2,10 @@ import OutlineAtSymbolIcon from "heroicons/outline/at-symbol.svg";
 import OutlineInboxIcon from "heroicons/outline/inbox.svg";
 import SolidPlusIcon from "heroicons/solid/plus.svg";
 import SolidSearchIcon from "heroicons/solid/search.svg";
+import Link from "next/link";
 import React, { ChangeEvent, ReactElement, useMemo, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { firestore } from "src/firebase/client";
+import { firestore } from "src/firebase";
 import { Form } from "../../types/form";
 import Logo from "../Logo";
 import PrimaryLink from "./PrimaryLink";
@@ -36,7 +37,11 @@ export default function Sidebar(): ReactElement {
   return (
     <div className="h-0 flex-1 flex flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
       <div className="flex items-center flex-shrink-0 px-7 space-x-4">
-        <Logo className="w-8 h-8 text-rose-500" />
+        <Link href="/inbox">
+          <a>
+            <Logo className="w-8 h-8 text-rose-500" />
+          </a>
+        </Link>
       </div>
       <UserMenu />
       {/* Navigation */}

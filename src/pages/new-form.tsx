@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { Controller, useForm } from "react-hook-form";
 import ColorSelect from "src/components/ColorSelect";
-import { firestore } from "src/firebase/client";
+import { firestore } from "src/firebase";
 import { useHost } from "src/hooks/useHost";
 import { AppLayout } from "src/layouts/AppLayout";
 import { FormColor } from "src/types/form";

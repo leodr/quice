@@ -2,10 +2,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import SolidCheckIcon from "heroicons/solid/check.svg";
 import SolidXIcon from "heroicons/solid/x.svg";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { ReactNode, SyntheticEvent, useState } from "react";
+import { auth } from "src/firebase";
 import Spinner from "../components/Spinner";
 import { AuthLayout } from "../layouts/AuthLayout";
-import { useAuth } from "../lib/auth";
 import { PromiseStatus } from "../types/promiseStatus";
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -17,7 +18,7 @@ interface LoginFormElement extends HTMLFormElement {
 }
 
 export default function LoginPage() {
-  const { signin } = useAuth();
+  const router = useRouter();
   const [submissionState, setSubmissionState] = useState<PromiseStatus>("idle");
 
   async function handleLoginFormSubmit(
@@ -30,8 +31,9 @@ export default function LoginPage() {
     setSubmissionState("pending");
 
     try {
-      await signin(email.value, password.value, "/inbox");
+      await auth.signInWithEmailAndPassword(email.value, password.value);
       setSubmissionState("fulfilled");
+      router.push("/inbox");
     } catch {
       setSubmissionState("rejected");
     }

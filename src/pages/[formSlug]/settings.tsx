@@ -13,7 +13,7 @@ import ColorSelect from "src/components/ColorSelect";
 import { useModal } from "src/components/ModalProvider";
 import { useSnack } from "src/components/SnackbarProvider";
 import Switch from "src/components/Switch";
-import { firestore } from "src/firebase/client";
+import { firestore } from "src/firebase";
 import { useHost } from "src/hooks/useHost";
 import { AppLayout } from "src/layouts/AppLayout";
 import { Form, FormColor } from "src/types/form";

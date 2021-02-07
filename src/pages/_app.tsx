@@ -4,7 +4,6 @@ import { ReactNode } from "react";
 import ModalProvider from "src/components/ModalProvider";
 import SnackbarProvider from "src/components/SnackbarProvider";
 import "tailwindcss/tailwind.css";
-import { ProvideAuth } from "../lib/auth";
 import "../styles/app.css";
 
 function CustomApp({ Component, pageProps }: AppProps) {
@@ -12,7 +11,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page: ReactNode) => page);
 
   return (
-    <ProvideAuth>
+    <>
       <Head>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
         <link
@@ -43,7 +42,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
           {getLayout(<Component {...pageProps} />)}
         </SnackbarProvider>
       </ModalProvider>
-    </ProvideAuth>
+    </>
   );
 }
 

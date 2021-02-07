@@ -3,9 +3,9 @@ import SolidCheckIcon from "heroicons/solid/check.svg";
 import SolidXIcon from "heroicons/solid/x.svg";
 import Link from "next/link";
 import { ReactNode, SyntheticEvent, useState } from "react";
+import { auth } from "src/firebase";
 import Spinner from "../components/Spinner";
 import { AuthLayout } from "../layouts/AuthLayout";
-import { useAuth } from "../lib/auth";
 import { PromiseStatus } from "../types/promiseStatus";
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -16,8 +16,6 @@ interface LoginFormElement extends HTMLFormElement {
 }
 
 export default function PasswordResetPage() {
-  const { sendPasswordResetEmail } = useAuth();
-
   const [submissionState, setSubmissionState] = useState<PromiseStatus>("idle");
 
   async function handleLoginFormSubmit(
@@ -30,7 +28,7 @@ export default function PasswordResetPage() {
     setSubmissionState("pending");
 
     try {
-      await sendPasswordResetEmail(email.value);
+      await auth.sendPasswordResetEmail(email.value);
       setSubmissionState("fulfilled");
     } catch {
       setSubmissionState("rejected");

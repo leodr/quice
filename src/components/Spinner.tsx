@@ -2,10 +2,8 @@ import { ReactElement, SVGProps } from "react";
 
 export default function Spinner(props: SVGProps<SVGSVGElement>): ReactElement {
   return (
-    <>
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" {...props}>
-        <circle cx={50} cy={50} r={45} />
-      </svg>
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <circle cx={50} cy={50} r={45} />
       <style jsx>{`
         svg {
           animation: 2s linear infinite svg-animation;
@@ -47,6 +45,6 @@ export default function Spinner(props: SVGProps<SVGSVGElement>): ReactElement {
           }
         }
       `}</style>
-    </>
+    </svg>
   );
 }

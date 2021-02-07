@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { firebase } from "../firebase/client";
+import { firebase } from "../firebase";
 
 /**
  * This page does not return any elements, since it is only meant for redirects.
