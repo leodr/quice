@@ -10,7 +10,8 @@
     "format": "prettier . --write --ignore-path .gitignore",
     "lint": "eslint . --ignore-path .gitignore",
     "seed-database": "node scripts/seedDatabase.js",
-    "start": "next start"
+    "start": "next start",
+    "validate": "yarn check-types && yarn lint"
   },
   "dependencies": {
     "@headlessui/react": "^0.3.0",
@@ -27,7 +28,6 @@
     "clsx": "^1.1.1",
     "date-fns": "^2.17.0",
     "dotenv": "^8.2.0",
-    "enquirer": "^2.3.6",
     "faker": "^5.3.1",
     "firebase": "^8.2.6",
     "firebase-admin": "^9.4.2",
