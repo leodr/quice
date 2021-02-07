@@ -36,7 +36,7 @@ qui at totam amet vel soluta necessitatibus. Corporis.
 
 <br />
 
-![](https://super.so/icon/dark/server.svg)
+![](./assets/icons/server.svg)
 
 **Self Hosted**
 
@@ -45,7 +45,7 @@ your own Firebase project. This way you control your data.
 
 <br />
 
-![](https://super.so/icon/dark/users.svg)
+![](./assets/icons/users.svg)
 
 **Ready for Teams**
 
@@ -55,7 +55,7 @@ understanding on what needs to be worked on.
 
 <br />
 
-![](https://super.so/icon/dark/edit.svg)
+![](./assets/icons/edit.svg)
 
 **Customizable**
 
@@ -107,10 +107,10 @@ create a pull request!
 </p>
 <p align="center">
     <a href="https://twitter.com/leodriesch">
-        <img alt="Leo Driesch on Twitter" src="https://super.so/icon/dark/twitter.svg">
+        <img alt="Leo Driesch on Twitter" src="./assets/icons/twitter.svg">
     </a>
     &nbsp;&nbsp;
     <a href="https://github.com/leodr">
-        <img alt="Leo Driesch on GitHub" src="https://super.so/icon/dark/github.svg">
+        <img alt="Leo Driesch on GitHub" src="./assets/icons/github.svg">
     </a>
 </p>
