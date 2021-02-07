@@ -1,48 +1,116 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with
-[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img src="./assets/github-banner.png" alt="Quice Logo">
 
-## Getting Started
+<h1 align="center">Quice</h1>
+<p align="center">
+    <strong>Self-hosted form submission service</strong>
+</p>
+<p align="center">
+    <a href="https://github.com/leodr/quice/blob/main/LICENSE">
+        <img alt="MIT License" src="https://img.shields.io/github/license/leodr/quice?color=%23A855F7&labelColor=%2327272A&style=for-the-badge">
+    </a>
+    <a href="https://github.com/leodr/quice/blob/main/package.json">
+        <img alt="David" src="https://img.shields.io/david/leodr/quice?color=%236366F1&labelColor=%2327272A&style=for-the-badge">
+    </a>
+    <a href="https://github.com/leodr/quice/issues">
+        <img alt="Open GitHub issues" src="https://img.shields.io/github/issues/leodr/quice?color=%2310B981&labelColor=%2327272A&style=for-the-badge">
+    </a>
+</p>
+<p align="center">
+    <a href="#features"><b>Features</b></a>
+    <span>  •  </span>
+    <a href="#demo"><b>Demo</b></a>
+    <span>  •  </span>
+    <a href="#get-started"><b>Get Started</b></a>  
+    <span>  •  </span>
+    <a href="#contribute"><b>Contribute</b></a>
+</p>
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim nam nihil nostrum
+qui at totam amet vel soluta necessitatibus. Corporis.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-result.
+<br />
 
-You can start editing the page by modifying `pages/index.js`. The page
-auto-updates as you edit the file.
+## ❯ Features
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello). This
-endpoint can be edited in `pages/api/hello.js`.
+<br />
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are
-treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead
-of React pages.
+![](https://super.so/icon/dark/server.svg)
 
-## Learn More
+**Self Hosted**
 
-To learn more about Next.js, take a look at the following resources:
+You can deploy the application to your own Vercel account and connect it with
+your own Firebase project. This way you control your data.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<br />
 
-You can check out
-[the Next.js GitHub repository](https://github.com/vercel/next.js/) - your
-feedback and contributions are welcome!
+![](https://super.so/icon/dark/users.svg)
 
-## Deploy on Vercel
+**Ready for Teams**
 
-The easiest way to deploy your Next.js app is to use the
-[Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
+Get your whole team onboard with an easy-to-understand. Anybody can be assigned
+to work on taking action to a form submission, so you always have a clear
+understanding on what needs to be worked on.
 
-Check out our
-[Next.js deployment documentation](https://nextjs.org/docs/deployment) for more
-details.
+<br />
+
+![](https://super.so/icon/dark/edit.svg)
+
+**Customizable**
+
+During deployment you will fork the project, which will allow you to add any
+custom features you and your team need. If you implemented a feature you think
+everyone would benefit from, please send in a pull request!
+
+<br />
+
+## ❯ Demo
+
+If you want to have a look at the interface before deploying it yourself take a
+look at the public demo.
+
+<p align="center">
+    <a href="https://quice.io">
+        <img alt="Open demo" src="./assets/demo-button.svg"/>
+    </a>
+</p>
+
+You can use the account `test@quice.io` with the password `password` if you
+refuse to create your own account.
+
+> Please note that the demo app is modified to be accessible publicly. After you
+> deploy your own version, only you and members of your team will be able to
+> access it.
+
+<br />
+
+## ❯ Get Started
+
+Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis fugiat alias
+blanditiis eveniet impedit fugit voluptatem quis explicabo expedita velit
+asperiores itaque deleniti.
+
+<br />
+
+## ❯ Contribute
+
+If you think you have any ideas that could benefit the project, feel free to
+create a pull request!
+
+---
+
+<p align="center">
+    <sub>
+        Project by Leo Driesch, released under <a href="https://github.com/leodr/quice/blob/main/LICENSE">MIT license</a>.
+    </sub>
+</p>
+<p align="center">
+    <a href="https://twitter.com/leodriesch">
+        <img alt="Leo Driesch on Twitter" src="https://super.so/icon/dark/twitter.svg">
+    </a>
+    &nbsp;&nbsp;
+    <a href="https://github.com/leodr">
+        <img alt="Leo Driesch on GitHub" src="https://super.so/icon/dark/github.svg">
+    </a>
+</p>
