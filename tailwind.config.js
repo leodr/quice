@@ -5,7 +5,15 @@ module.exports = {
   purge: {
     content: ["./src/**/*.{js,ts,jsx,tsx}"],
     options: {
-      safelist: [/^\.bg-[a-z]+?-500$/],
+      safelist: [
+        "bg-orange-500",
+        "bg-yellow-500",
+        "bg-green-500",
+        "bg-teal-500",
+        "bg-indigo-500",
+        "bg-purple-500",
+        "bg-pink-500",
+      ],
     },
   },
   darkMode: false,
