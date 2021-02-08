@@ -1,5 +1,6 @@
 import SolidChevronLeftIcon from "heroicons/solid/chevron-left.svg";
 import SolidCogIcon from "heroicons/solid/cog.svg";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
@@ -43,6 +44,9 @@ export default function FormPage() {
 
   return (
     <>
+      <Head>
+        <title>Submissions | Quice</title>
+      </Head>
       <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
         {/* Breadcrumb */}
         <nav

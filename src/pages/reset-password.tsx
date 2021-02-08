@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import SolidCheckIcon from "heroicons/solid/check.svg";
 import SolidXIcon from "heroicons/solid/x.svg";
+import Head from "next/head";
 import Link from "next/link";
 import { ReactNode, SyntheticEvent, useState } from "react";
 import { auth } from "src/firebase";
@@ -37,6 +38,9 @@ export default function PasswordResetPage() {
 
   return (
     <form className="space-y-6" onSubmit={handleLoginFormSubmit}>
+      <Head>
+        <title>Reset Password | Quice</title>
+      </Head>
       <p className="text-sm text-gray-500">
         Enter your user account's verified email address and we will send you a
         password reset link.

@@ -1,4 +1,5 @@
 import SolidChevronLeftIcon from "heroicons/solid/chevron-left.svg";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
 import ListHeader from "src/components/ListHeader";
@@ -27,6 +28,9 @@ export default function InboxPage() {
 
   return (
     <>
+      <Head>
+        <title>Inbox | Quice</title>
+      </Head>
       <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
         {/* Breadcrumb */}
         <nav
