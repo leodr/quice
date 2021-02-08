@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import SolidCheckIcon from "heroicons/solid/check.svg";
 import SolidXIcon from "heroicons/solid/x.svg";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode, SyntheticEvent, useState } from "react";
@@ -60,6 +61,9 @@ export default function JoinPage() {
 
   return (
     <>
+      <Head>
+        <title>Join | Quice</title>
+      </Head>
       <form className="space-y-6" onSubmit={handleLoginFormSubmit}>
         <div className="flex space-x-4">
           <div>

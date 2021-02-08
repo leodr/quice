@@ -1,6 +1,7 @@
 import { Listbox } from "@headlessui/react";
 import clsx from "clsx";
 import SolidArrowLeftIcon from "heroicons/solid/arrow-left.svg";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
@@ -310,6 +311,9 @@ export default function FormSettingsPage() {
 
   return (
     <main className="flex-1 overflow-y-auto focus:outline-none">
+      <Head>
+        <title>Form settings | Quice</title>
+      </Head>
       <div className="relative max-w-3xl mx-auto md:px-8 xl:px-0">
         <div className="pt-10 pb-16">
           <div className="px-4 sm:px-6 md:px-0 flex items-center space-x-4">
