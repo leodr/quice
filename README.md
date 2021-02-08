@@ -199,6 +199,20 @@ console:
 After that you can finish up the Vercel deployment and visit your fully set up
 site!
 
+### 3. Add Authorized Emails
+
+To secure your deployment you have to set up a list of email adresses that are
+allowed to view your data.
+
+A UI for this is in the planning, but for now you have to go to the Firebase
+console and head over to the Cloud Firestore dashboard.
+
+There you want to start a new collection that is called `auth` and add a
+document with the id `authorizedUsers`.
+
+In that document add a field named `emails` with an array type and add any
+emails to this array that you want to allow.
+
 <br />
 
 ## ❯ Contribute
