@@ -8,7 +8,7 @@ module.exports = {
       safelist: [/^\.bg-[a-z]+?-500$/],
     },
   },
-  darkMode: false, // or 'media' or 'class'
+  darkMode: false,
   theme: {
     extend: {
       fontFamily: {
