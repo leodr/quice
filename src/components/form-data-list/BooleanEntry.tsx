@@ -1,5 +1,4 @@
-import SolidCheckIcon from "heroicons/solid/check.svg";
-import SolidXIcon from "heroicons/solid/x.svg";
+import { CheckIcon, XIcon } from "@heroicons/react/solid";
 import React, { ReactElement } from "react";
 
 interface Props {
@@ -17,7 +16,7 @@ export default function BooleanEntry({
         <dt className="text-sm font-medium text-gray-500">{propertyName}</dt>
         <dd className="mt-1 text-sm text-green-600">
           <span className="sr-only">True</span>
-          <SolidCheckIcon className="h-5 w-5 -ml-px" aria-hidden="true" />
+          <CheckIcon className="h-5 w-5 -ml-px" aria-hidden="true" />
         </dd>
       </div>
     );
@@ -28,7 +27,7 @@ export default function BooleanEntry({
       <dt className="text-sm font-medium text-gray-500">{propertyName}</dt>
       <dd className="mt-1 text-sm text-red-600">
         <span className="sr-only">False</span>
-        <SolidXIcon className="h-5 w-5 -ml-1" aria-hidden="true" />
+        <XIcon className="h-5 w-5 -ml-1" aria-hidden="true" />
       </dd>
     </div>
   );

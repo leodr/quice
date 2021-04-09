@@ -1,7 +1,5 @@
+import { CheckIcon, SortAscendingIcon, XIcon } from "@heroicons/react/solid";
 import { AnimatePresence, motion } from "framer-motion";
-import SolidCheckIcon from "heroicons/solid/check.svg";
-import SolidSortAscendingIcon from "heroicons/solid/sort-ascending.svg";
-import SolidXIcon from "heroicons/solid/x.svg";
 import { ReactNode, SyntheticEvent, useState } from "react";
 import Logo from "src/components/Logo";
 import Spinner from "src/components/Spinner";
@@ -175,13 +173,13 @@ export default function SetupPage() {
                     )}
                     {submissionState === "fulfilled" && (
                       <>
-                        <SolidCheckIcon className="h-6 w-6" />
+                        <CheckIcon className="h-6 w-6" />
                         <span>Account created! Forwarding...</span>
                       </>
                     )}
                     {submissionState === "rejected" && (
                       <>
-                        <SolidXIcon className="h-6 w-6" />
+                        <XIcon className="h-6 w-6" />
                         <span>Account creation failed.</span>
                       </>
                     )}
@@ -223,7 +221,7 @@ export default function SetupPage() {
                   />
                 </div>
                 <button className="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-rose-400 focus:border-rose-400">
-                  <SolidSortAscendingIcon
+                  <SortAscendingIcon
                     className="h-5 w-5 text-gray-400"
                     aria-hidden="true"
                   />

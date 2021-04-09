@@ -1,6 +1,6 @@
 import { Listbox } from "@headlessui/react";
+import { ArrowLeftIcon } from "@heroicons/react/solid";
 import clsx from "clsx";
-import SolidArrowLeftIcon from "heroicons/solid/arrow-left.svg";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -317,7 +317,7 @@ export default function FormSettingsPage() {
           <div className="px-4 sm:px-6 md:px-0 flex items-center space-x-4">
             <Link href={`/${formSlug}`}>
               <a>
-                <SolidArrowLeftIcon className="h-6 w-6 text-gray-400" />
+                <ArrowLeftIcon className="h-6 w-6 text-gray-400" />
               </a>
             </Link>
             <h1 className="text-3xl font-extrabold text-gray-900">

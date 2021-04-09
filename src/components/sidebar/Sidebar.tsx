@@ -1,7 +1,5 @@
-import OutlineAtSymbolIcon from "heroicons/outline/at-symbol.svg";
-import OutlineInboxIcon from "heroicons/outline/inbox.svg";
-import SolidPlusIcon from "heroicons/solid/plus.svg";
-import SolidSearchIcon from "heroicons/solid/search.svg";
+import { AtSymbolIcon, InboxIcon } from "@heroicons/react/outline";
+import { PlusIcon, SearchIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import React, { ChangeEvent, ReactElement, useMemo, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -47,10 +45,10 @@ export default function Sidebar(): ReactElement {
       {/* Navigation */}
       <nav className="px-3 mt-6">
         <div className="space-y-1">
-          <PrimaryLink href="/inbox" Icon={OutlineInboxIcon}>
+          <PrimaryLink href="/inbox" Icon={InboxIcon}>
             Inbox
           </PrimaryLink>
-          <PrimaryLink href="/tasks" Icon={OutlineAtSymbolIcon}>
+          <PrimaryLink href="/tasks" Icon={AtSymbolIcon}>
             Assigned to me
           </PrimaryLink>
         </div>
@@ -71,7 +69,7 @@ export default function Sidebar(): ReactElement {
                 className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
                 aria-hidden="true"
               >
-                <SolidSearchIcon
+                <SearchIcon
                   className="mr-3 h-4 w-4 text-gray-400"
                   aria-hidden="true"
                 />
@@ -110,7 +108,7 @@ export default function Sidebar(): ReactElement {
               href="/new-form"
               leading={
                 <span className="w-2.5 h-2.5 mr-4 relative">
-                  <SolidPlusIcon
+                  <PlusIcon
                     className="w-6 h-6 -top-2 -left-1.5 absolute text-gray-400 mr-4"
                     aria-hidden="true"
                   />

@@ -1,6 +1,5 @@
+import { CheckIcon, XIcon } from "@heroicons/react/solid";
 import { AnimatePresence, motion } from "framer-motion";
-import SolidCheckIcon from "heroicons/solid/check.svg";
-import SolidXIcon from "heroicons/solid/x.svg";
 import Head from "next/head";
 import Link from "next/link";
 import { ReactNode, SyntheticEvent, useState } from "react";
@@ -81,13 +80,13 @@ export default function PasswordResetPage() {
             {submissionState === "pending" && <Spinner className="w-6 h-6" />}
             {submissionState === "fulfilled" && (
               <>
-                <SolidCheckIcon className="h-6 w-6" />
+                <CheckIcon className="h-6 w-6" />
                 <span>Email sent</span>
               </>
             )}
             {submissionState === "rejected" && (
               <>
-                <SolidXIcon className="h-6 w-6" />
+                <XIcon className="h-6 w-6" />
                 <span>Please check your inputs.</span>
               </>
             )}
