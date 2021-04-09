@@ -230,10 +230,9 @@ export default function FormSettingsPage() {
                         <div className="max-w-lg flex flex-col rounded-md shadow-sm">
                           <input
                             type="text"
-                            name="name"
                             id="name"
                             className="relative flex-1 block w-full focus:ring-rose-400 focus:border-rose-400 min-w-0 rounded-none rounded-t-md sm:text-sm border-gray-300"
-                            ref={register({ minLength: 1 })}
+                            {...register("name", { minLength: 1 })}
                           />
                           <span className="inline-flex items-center px-3 py-1 rounded-b-md border border-t-0 border-gray-300 bg-gray-50 text-gray-500 text-sm sm:text-xs">
                             {`${host}/${formSlug}`}
@@ -259,10 +258,9 @@ export default function FormSettingsPage() {
                       <div className="mt-1 sm:mt-0 sm:col-span-2">
                         <textarea
                           id="description"
-                          name="description"
                           rows={3}
                           className="max-w-lg shadow-sm block w-full focus:ring-rose-400 focus:border-rose-400 sm:text-sm border-gray-300 rounded-md"
-                          ref={register}
+                          {...register("description")}
                         />
                         <p className="mt-2 text-sm text-gray-500">
                           It is helpful to state where the form is found.
@@ -274,7 +272,7 @@ export default function FormSettingsPage() {
                         name="color"
                         control={control}
                         defaultValue="green"
-                        render={({ value, onChange }) => (
+                        render={({ field: { onChange, value } }) => (
                           <Listbox value={value} onChange={onChange}>
                             {({ open }) => (
                               <>
