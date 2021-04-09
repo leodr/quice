@@ -86,7 +86,7 @@ async function seed() {
         email: faker.internet.email(),
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         companyWebsite: faker.internet.url(),
-        companySize: faker.random.number(100),
+        companySize: faker.datatype.number(100),
         productsOfInterest: [
           maybe() && "Vercel",
           maybe() && "Preview Deployments",
@@ -160,7 +160,7 @@ async function seed() {
         email: faker.internet.email(),
         name: `${faker.name.firstName()} ${faker.name.lastName()}`,
         companyWebsite: faker.internet.url(),
-        companySize: faker.random.number(100),
+        companySize: faker.datatype.number(100),
         productsOfInterest: {
           "Ich möchte mehr über das Digitalkonzept der Showcases erfahren": maybe(),
           "Ich würde gerne die Labs besuchen": maybe(),
