@@ -1,7 +1,6 @@
 import { Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import clsx from "clsx";
-import SolidCheckIcon from "heroicons/solid/check.svg";
-import SolidSelectorIcon from "heroicons/solid/selector.svg";
 import React, { ReactElement } from "react";
 import { FormColor } from "src/types/form";
 
@@ -34,10 +33,7 @@ export default function ColorSelect({ open, color }: Props): ReactElement {
           </span>
         </div>
         <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-          <SolidSelectorIcon
-            className="h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
+          <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
         </span>
       </Listbox.Button>
       <Transition
@@ -84,7 +80,7 @@ export default function ColorSelect({ open, color }: Props): ReactElement {
 
                   {selected && (
                     <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-rose-500">
-                      <SolidCheckIcon className="h-5 w-5" aria-hidden="true" />
+                      <CheckIcon className="h-5 w-5" aria-hidden="true" />
                     </span>
                   )}
                 </>

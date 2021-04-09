@@ -1,5 +1,5 @@
 import { Transition } from "@headlessui/react";
-import SolidSelectorIcon from "heroicons/solid/selector.svg";
+import { SelectorIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import { useDocumentData } from "react-firebase-hooks/firestore";
@@ -58,7 +58,7 @@ export default function UserMenu(): ReactElement {
               </span>
             </span>
           </span>
-          <SolidSelectorIcon
+          <SelectorIcon
             className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
             aria-hidden="true"
           />

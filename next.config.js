@@ -3,16 +3,9 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer({
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
-      use: ["@svgr/webpack"],
-    });
-
-    return config;
+  future: {
+    webpack5: true,
+    strictPostcssConfiguration: true,
   },
   async rewrites() {
     return [

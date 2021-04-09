@@ -1,6 +1,5 @@
+import { CheckIcon, XIcon } from "@heroicons/react/solid";
 import { AnimatePresence, motion } from "framer-motion";
-import SolidCheckIcon from "heroicons/solid/check.svg";
-import SolidXIcon from "heroicons/solid/x.svg";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -102,13 +101,13 @@ export default function LoginPage() {
                 )}
                 {submissionState === "fulfilled" && (
                   <>
-                    <SolidCheckIcon className="h-6 w-6" />
+                    <CheckIcon className="h-6 w-6" />
                     <span>Sign in successful! Forwarding...</span>
                   </>
                 )}
                 {submissionState === "rejected" && (
                   <>
-                    <SolidXIcon className="h-6 w-6" />
+                    <XIcon className="h-6 w-6" />
                     <span>Incorrect username or password.</span>
                   </>
                 )}
