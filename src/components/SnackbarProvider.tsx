@@ -1,5 +1,5 @@
+import { XIcon } from "@heroicons/react/outline";
 import { AnimatePresence, motion } from "framer-motion";
-import OutlineXIcon from "heroicons/outline/x.svg";
 import React, {
   createContext,
   ReactElement,
@@ -86,7 +86,7 @@ export default function SnackbarProvider({ children }: Props): ReactElement {
                       }
                     >
                       <span className="sr-only">Dismiss</span>
-                      <OutlineXIcon
+                      <XIcon
                         className="h-6 w-6 text-white"
                         aria-hidden="true"
                       />

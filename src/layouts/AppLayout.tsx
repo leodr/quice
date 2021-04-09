@@ -1,6 +1,5 @@
 import { Transition } from "@headlessui/react";
-import OutlineMenuIcon from "heroicons/outline/menu.svg";
-import OutlineXIcon from "heroicons/outline/x.svg";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { ReactElement, ReactNode, useState } from "react";
 import Logo from "../components/Logo";
 import Sidebar from "../components/sidebar/Sidebar";
@@ -50,10 +49,7 @@ export function AppLayout({ children }: Props): ReactElement {
                 className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               >
                 <span className="sr-only">Close sidebar</span>
-                <OutlineXIcon
-                  className="h-6 w-6 text-white"
-                  aria-hidden="true"
-                />
+                <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
               </button>
             </div>
             <Sidebar />
@@ -82,7 +78,7 @@ export function AppLayout({ children }: Props): ReactElement {
                 className="-mr-3 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-pink-600"
               >
                 <span className="sr-only">Open sidebar</span>
-                <OutlineMenuIcon className="h-6 w-6" aria-hidden="true" />
+                <MenuIcon className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
           </div>
