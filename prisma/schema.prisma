@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Form {
+    id               String  @id @default(cuid())
+    name             String
+    slug             String  @unique
+    description      String
+    allowSubmissions Boolean @default(true)
+    color            String
+
+    Submission Submission[]
+}
+
+model Submission {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    data      Json
+    done      Boolean  @default(false)
+
+    formId String
+    Form   Form   @relation(fields: [formId], references: [id])
+}
