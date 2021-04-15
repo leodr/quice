@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { FormsModule } from "./forms/forms.module";
+import { PrismaService } from "./prisma/prisma.service";
 import { SubmissionModule } from "./submission/submission.module";
 
 @Module({
@@ -14,6 +15,6 @@ import { SubmissionModule } from "./submission/submission.module";
     FormsModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [PrismaService],
 })
 export class AppModule {}
