@@ -10,6 +10,22 @@ generator client {
     provider = "prisma-client-js"
 }
 
+model User {
+    id           String         @id @default(cuid())
+    firstName    String
+    lastName     String
+    email        String         @unique
+    passwordHash String
+    RefreshToken RefreshToken[]
+}
+
+model RefreshToken {
+    id   String @id @default(cuid())
+    user User   @relation(fields: [userId], references: [id])
+
+    userId String
+}
+
 model Form {
     id               String  @id @default(cuid())
     name             String
