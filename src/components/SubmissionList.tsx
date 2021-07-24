@@ -119,7 +119,7 @@ export default function SubmissionList({
           );
         }}
         components={{
-          Footer: () => {
+          Footer() {
             if (!canLoadMore) return null;
 
             return (

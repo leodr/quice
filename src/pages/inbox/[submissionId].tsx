@@ -71,6 +71,6 @@ export default function InboxPage() {
   );
 }
 
-InboxPage.getLayout = (page: ReactNode) => {
+InboxPage.getLayout = function getLayout(page: ReactNode) {
   return <AppLayout>{page}</AppLayout>;
 };

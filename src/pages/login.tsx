@@ -129,7 +129,7 @@ export default function LoginPage() {
   );
 }
 
-LoginPage.getLayout = (page: ReactNode) => {
+LoginPage.getLayout = function getLayout(page: ReactNode) {
   return (
     <AuthLayout
       headline="Sign in to your account"

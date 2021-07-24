@@ -15,6 +15,6 @@ export default function TasksPage() {
   );
 }
 
-TasksPage.getLayout = (page: ReactNode) => {
+TasksPage.getLayout = function getLayout(page: ReactNode) {
   return <AppLayout>{page}</AppLayout>;
 };

@@ -96,6 +96,6 @@ export default function FormPage() {
   );
 }
 
-FormPage.getLayout = (page: ReactNode) => {
+FormPage.getLayout = function getLayout(page: ReactNode) {
   return <AppLayout>{page}</AppLayout>;
 };

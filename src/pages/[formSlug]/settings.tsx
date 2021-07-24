@@ -391,6 +391,6 @@ export default function FormSettingsPage() {
   );
 }
 
-FormSettingsPage.getLayout = (page: ReactNode) => {
+FormSettingsPage.getLayout = function getLayout(page: ReactNode) {
   return <AppLayout>{page}</AppLayout>;
 };
