@@ -17,9 +17,10 @@ export default function DataEntry({
   propertyName,
   value,
 }: DataEntryProps): ReactElement {
-  const prettyName = useMemo(() => prettifyPropertyName(propertyName), [
-    propertyName,
-  ]);
+  const prettyName = useMemo(
+    () => prettifyPropertyName(propertyName),
+    [propertyName]
+  );
 
   switch (typeof value) {
     case "string":

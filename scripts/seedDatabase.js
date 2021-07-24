@@ -162,7 +162,8 @@ async function seed() {
         companyWebsite: faker.internet.url(),
         companySize: faker.datatype.number(100),
         productsOfInterest: {
-          "Ich möchte mehr über das Digitalkonzept der Showcases erfahren": maybe(),
+          "Ich möchte mehr über das Digitalkonzept der Showcases erfahren":
+            maybe(),
           "Ich würde gerne die Labs besuchen": maybe(),
           "Ich möchte die Digitalstadt Ahaus besichtigen": maybe(),
           "Mich interessiert eine Kooperation": maybe(),
