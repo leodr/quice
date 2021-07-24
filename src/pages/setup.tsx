@@ -300,9 +300,9 @@ export default function SetupPage() {
                       </span>
                     </h1>
                     <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                      First we'll guide you through a short setup sequence. You
-                      will set up an account, add members that can access this
-                      workspace and create your first form!
+                      First we&apos;ll guide you through a short setup sequence.
+                      You will set up an account, add members that can access
+                      this workspace and create your first form!
                     </p>
                   </div>
                 </div>

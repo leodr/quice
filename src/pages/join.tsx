@@ -169,7 +169,7 @@ export default function JoinPage() {
   );
 }
 
-JoinPage.getLayout = (page: ReactNode) => {
+JoinPage.getLayout = function getLayout(page: ReactNode) {
   return (
     <AuthLayout
       headline="Create your account"

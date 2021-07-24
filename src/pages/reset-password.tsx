@@ -41,8 +41,8 @@ export default function PasswordResetPage() {
         <title>Reset Password | Quice</title>
       </Head>
       <p className="text-sm text-gray-500">
-        Enter your user account's verified email address and we will send you a
-        password reset link.
+        Enter your user account&apos;s verified email address and we will send
+        you a password reset link.
       </p>
       <div>
         <label
@@ -97,7 +97,7 @@ export default function PasswordResetPage() {
   );
 }
 
-PasswordResetPage.getLayout = (page: ReactNode) => {
+PasswordResetPage.getLayout = function getLayout(page: ReactNode) {
   return (
     <AuthLayout
       headline="Reset your password"

@@ -164,6 +164,6 @@ export default function NewFormPage() {
   );
 }
 
-NewFormPage.getLayout = (page: ReactNode) => {
+NewFormPage.getLayout = function getLayout(page: ReactNode) {
   return <AppLayout>{page}</AppLayout>;
 };

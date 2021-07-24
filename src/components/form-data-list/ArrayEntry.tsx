@@ -16,6 +16,7 @@ export default function ArrayEntry({
       <dd className="mt-1 text-sm text-gray-900">
         <ul className="space-y-1">
           {value.map((e) => (
+            // eslint-disable-next-line react/jsx-key
             <li className="flex items-center space-x-2">
               <span
                 aria-hidden="true"

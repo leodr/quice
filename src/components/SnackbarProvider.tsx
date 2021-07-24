@@ -71,7 +71,7 @@ export default function SnackbarProvider({ children }: Props): ReactElement {
                         className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-rose-500 bg-white hover:bg-rose-50"
                         onClick={() => snackbar.undo?.()}
                       >
-                        "Undo"
+                        &qout;Undo&qout;
                       </button>
                     </div>
                   )}
