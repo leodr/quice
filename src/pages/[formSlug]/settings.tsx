@@ -32,14 +32,8 @@ export default function FormSettingsPage() {
 
   const host = useHost();
 
-  const {
-    register,
-    formState,
-    handleSubmit,
-    watch,
-    control,
-    setValue,
-  } = useForm<CreateFormForm>();
+  const { register, formState, handleSubmit, watch, control, setValue } =
+    useForm<CreateFormForm>();
   const { errors } = formState;
 
   const showModal = useModal();
@@ -49,7 +43,8 @@ export default function FormSettingsPage() {
   const [forms, loading, error] = useCollectionData<Form>(
     formSlug
       ? firestore.collection("forms").where("slug", "==", formSlug)
-      : null
+      : null,
+    { idField: "id" }
   );
 
   const showSnackbar = useSnack();
