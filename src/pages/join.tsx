@@ -28,12 +28,8 @@ export default function JoinPage() {
   ) {
     event.preventDefault();
 
-    const {
-      email,
-      password,
-      firstName,
-      lastName,
-    } = event.currentTarget.elements;
+    const { email, password, firstName, lastName } =
+      event.currentTarget.elements;
 
     setSubmissionState("pending");
     try {

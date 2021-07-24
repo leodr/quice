@@ -19,13 +19,8 @@ interface CreateFormForm {
 }
 
 export default function NewFormPage() {
-  const {
-    register,
-    formState,
-    handleSubmit,
-    watch,
-    control,
-  } = useForm<CreateFormForm>();
+  const { register, formState, handleSubmit, watch, control } =
+    useForm<CreateFormForm>();
   const { errors } = formState;
 
   const router = useRouter();
